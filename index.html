@@ -1,0 +1,1844 @@
+
+```html name=world-parliament-ai-ULTIMATE.html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#06050e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="World Parliament AI">
+<title>⚖ WORLD PARLIAMENT · AI SUPREME</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#06050e;--p1:#0b0a18;--p2:#0f0e1e;--p3:#131224;
+  --b1:#1a1930;--b2:#222040;--b3:#2a2850;
+  --gold:#c8a84a;--gold2:#e8c870;--gold3:#8a6e28;--golddim:#3a2e10;
+  --ruby:#b03030;--sapphire:#2060a0;--emerald:#207050;
+  --violet:#5830a0;--amber:#c07010;--teal:#208080;
+  --tx:#eae8f8;--mu:#585580;--mu2:#32305a;
+  --red:#d84040;--green:#38c878;--blue:#3888d8;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--tx)}
+body{font-family:'Noto Sans Thai',sans-serif;display:flex;flex-direction:column;position:relative}
+body::before{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 20% 30%,rgba(200,168,74,.04) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 70%,rgba(88,48,160,.03) 0%,transparent 55%);
+  pointer-events:none;z-index:0}
+
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;transition:opacity 1.4s ease}
+#splash.gone{opacity:0;pointer-events:none}
+.sp-emblem{font-size:3.2rem;animation:epulse 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(200,168,74,.4))}
+@keyframes epulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.05);opacity:1}}
+.sp-rule{width:180px;height:1px;background:linear-gradient(90deg,transparent,var(--gold3),var(--gold),var(--gold3),transparent)}
+.sp-title{font-family:'Cinzel',serif;font-size:1.85rem;font-weight:900;letter-spacing:.24em;color:var(--gold);text-shadow:0 0 36px rgba(200,168,74,.3);text-align:center}
+.sp-sub{font-family:'Cinzel',serif;font-size:.52rem;font-weight:400;letter-spacing:.45em;color:var(--gold3);text-align:center}
+.sp-tag{font-family:'IBM Plex Mono';font-size:.42rem;letter-spacing:.2em;color:var(--mu);text-align:center;line-height:2.5}
+.sp-bar{width:200px;height:2px;background:var(--b2);overflow:hidden}
+.sp-fill{height:100%;background:linear-gradient(90deg,var(--gold3),var(--gold2));animation:spf 3.8s cubic-bezier(.25,.46,.45,.94) forwards}
+@keyframes spf{from{width:0}to{width:100%}}
+
+/* HEADER */
+#hdr{flex-shrink:0;position:relative;z-index:100;display:flex;align-items:center;gap:.55rem;padding:.52rem .88rem;background:rgba(6,5,14,.97);border-bottom:1px solid rgba(200,168,74,.14);backdrop-filter:blur(20px)}
+.hdr-logo{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;letter-spacing:.14em;color:var(--gold);text-shadow:0 0 14px rgba(200,168,74,.22);flex-shrink:0;cursor:pointer}
+.hdr-sep{width:1px;height:14px;background:var(--b2);flex-shrink:0}
+.hdr-status{font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-info{display:flex;gap:.4rem;align-items:center;flex-shrink:0;font-family:'IBM Plex Mono';font-size:.38rem;color:var(--gold)}
+.kd-row{display:flex;gap:4px;cursor:pointer;flex-shrink:0}
+.kd{width:7px;height:7px;border-radius:50%;background:var(--b2);transition:all .35s}
+.kd.on{background:var(--green);box-shadow:0 0 7px rgba(56,200,120,.8)}
+.kd.half{background:var(--gold);box-shadow:0 0 7px rgba(200,168,74,.7)}
+
+/* SCROLL */
+#scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:5.2rem;position:relative;z-index:1}
+#scroll::-webkit-scrollbar{width:3px}
+#scroll::-webkit-scrollbar-thumb{background:rgba(200,168,74,.16);border-radius:2px}
+
+/* BOTTOM NAV */
+#bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(6,5,14,.98);border-top:1px solid rgba(200,168,74,.11);display:flex;overflow-x:auto;padding-bottom:env(safe-area-inset-bottom,0);backdrop-filter:blur(20px)}
+#bnav::-webkit-scrollbar{display:none}
+.nb{flex:1;min-width:52px;display:flex;flex-direction:column;align-items:center;padding:.38rem .04rem .3rem;gap:.05rem;background:transparent;border:none;color:var(--mu);font-family:'Noto Sans Thai';font-size:.35rem;cursor:pointer;transition:color .2s;white-space:nowrap}
+.nb .ni{font-size:.95rem;transition:all .25s;display:block}
+.nb.on{color:var(--gold)}
+.nb.on .ni{transform:scale(1.12);filter:drop-shadow(0 0 5px rgba(200,168,74,.7))}
+
+/* PAGES */
+.pg{display:none;animation:pgin .3s ease}
+.pg.on{display:block}
+@keyframes pgin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* BUTTON & FORM */
+.btn{font-family:'Noto Sans Thai';font-size:.72rem;font-weight:600;padding:.4em .95em;border-radius:4px;border:none;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.3em;white-space:nowrap;letter-spacing:.03em}
+.btn:active{transform:scale(.95)}
+.btn:disabled{opacity:.28;pointer-events:none}
+.bgold{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#06050e;font-weight:700}
+.bgold:hover{filter:brightness(1.1)}
+.bsilver{background:rgba(255,255,255,.055);border:1px solid var(--b2);color:var(--mu)}
+.bsilver:hover{border-color:var(--gold3);color:var(--gold3)}
+.bruby{background:var(--ruby);color:#fff}
+.brow{display:flex;gap:.3rem;flex-wrap:wrap}
+.fi{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:4px;padding:.42rem .65rem;color:var(--tx);font-family:'Noto Sans Thai';font-size:.8rem;outline:none;transition:all .2s}
+.fi:focus{border-color:rgba(200,168,74,.35);background:rgba(200,168,74,.02)}
+.fi::placeholder{color:var(--mu)}
+textarea.fi{resize:none}
+.fsel{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:4px;padding:.42rem .65rem;color:var(--tx);font-family:'IBM Plex Mono';font-size:.58rem;outline:none;-webkit-appearance:none;cursor:pointer}
+.fsel option{background:var(--p1)}
+.hscroll{display:flex;gap:.28rem;overflow-x:auto;padding-bottom:.22rem;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.pill{font-family:'IBM Plex Mono';font-size:.46rem;white-space:nowrap;padding:.26em .66em;border-radius:2px;border:1px solid var(--b2);background:transparent;color:var(--mu);cursor:pointer;transition:all .16s;flex-shrink:0;letter-spacing:.04em}
+.pill.on{background:var(--gold);color:#06050e;border-color:var(--gold);font-weight:700}
+.pill:active{transform:scale(.94)}
+.stitle{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--gold3);margin:.72rem 0 .36rem;padding-left:.05rem}
+.chip{font-family:'IBM Plex Mono';font-size:.44rem;padding:.1em .48em;border-radius:2px;display:inline-block;letter-spacing:.06em}
+.cg{background:rgba(56,200,120,.08);color:var(--green);border:1px solid rgba(56,200,120,.15)}
+.cy{background:rgba(200,168,74,.08);color:var(--gold);border:1px solid rgba(200,168,74,.15)}
+.cr{background:rgba(216,64,64,.08);color:var(--red);border:1px solid rgba(216,64,64,.15)}
+.stag{font-family:'IBM Plex Mono';font-size:.46rem;padding:.1em .42em;border-radius:2px}
+.sok{color:var(--green);background:rgba(56,200,120,.07);border:1px solid rgba(56,200,120,.14)}
+.serr{color:var(--red);background:rgba(216,64,64,.07);border:1px solid rgba(216,64,64,.14)}
+.sload{color:var(--gold);background:rgba(200,168,74,.07);border:1px solid rgba(200,168,74,.14)}
+.card{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden}
+.card-hd{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.25em;color:var(--gold3);padding:.42rem .72rem;border-bottom:1px solid var(--b1);background:rgba(200,168,74,.02)}
+
+/* HERO */
+.hero{padding:.95rem .86rem .68rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,74,.09)}
+.hero::before{content:'';position:absolute;top:-25px;right:-15px;width:140px;height:140px;border:1px solid rgba(200,168,74,.05);border-radius:50%;pointer-events:none}
+.hero-eye{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.38em;color:var(--gold3);background:rgba(200,168,74,.05);border:1px solid rgba(200,168,74,.11);padding:.16em .68em;border-radius:2px;display:inline-block;margin-bottom:.5rem}
+.hero-title{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;line-height:.9;margin-bottom:.25rem;letter-spacing:.02em}
+.hero-title .g{color:var(--gold);text-shadow:0 0 18px rgba(200,168,74,.22)}
+.hero-sub{font-family:'Crimson Pro',serif;font-size:.82rem;color:var(--mu);line-height:1.9;font-style:italic}
+.hero-stats{display:flex;gap:.32rem;margin-top:.65rem}
+.hstat{flex:1;background:rgba(255,255,255,.02);border:1px solid rgba(200,168,74,.09);border-radius:5px;padding:.4rem;text-align:center}
+.hstat-n{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold);line-height:1}
+.hstat-l{font-family:'IBM Plex Mono';font-size:.34rem;color:var(--mu);margin-top:.05rem;letter-spacing:.12em}
+
+/* PARLIAMENT CARD */
+.parl-card{background:linear-gradient(135deg,rgba(200,168,74,.05),rgba(88,48,160,.03));border:1px solid rgba(200,168,74,.18);border-radius:8px;padding:.85rem;margin-bottom:.45rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.parl-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold3),var(--gold),transparent);opacity:0;transition:opacity .2s}
+.parl-card:hover{border-color:rgba(200,168,74,.35);background:linear-gradient(135deg,rgba(200,168,74,.08),rgba(88,48,160,.04))}
+.parl-card:hover::before{opacity:1}
+.parl-icon{font-size:2.2rem;margin-bottom:.35rem;display:block}
+.parl-title{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;letter-spacing:.04em;color:var(--gold);margin-bottom:.15rem}
+.parl-desc{font-size:.68rem;color:var(--mu);line-height:1.65;margin-bottom:.25rem}
+.parl-meta{font-family:'IBM Plex Mono';font-size:.38rem;color:var(--mu2);letter-spacing:.05em;display:flex;gap:.5rem}
+
+/* DELEGATE PROFILE */
+.dele-card{background:var(--p1);border:1px solid var(--b1);border-radius:8px;padding:.68rem .62rem;cursor:pointer;transition:all .2s;position:relative;text-align:center}
+.dele-card.on{border-color:var(--gold);background:rgba(200,168,74,.03);box-shadow:0 0 12px rgba(200,168,74,.08)}
+.dele-card:active{transform:scale(.96)}
+.dele-icon{font-size:1.8rem;display:block;margin-bottom:.24rem;filter:drop-shadow(0 0 4px rgba(200,168,74,.3))}
+.dele-name{font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:.04em;margin-bottom:.08rem;line-height:1.15}
+.dele-role{font-size:.5rem;color:var(--mu);margin-bottom:.14rem;line-height:1.3}
+.dele-stat{font-family:'IBM Plex Mono';font-size:.36rem;color:var(--gold3);margin-top:.15rem}
+.dele-ck{position:absolute;top:.28rem;right:.28rem;width:18px;height:18px;border-radius:50%;background:var(--b2);display:flex;align-items:center;justify-content:center;font-size:.48rem;transition:all .2s;font-weight:700}
+.dele-card.on .dele-ck{background:var(--gold);color:#06050e}
+
+/* ARENA DEBATE */
+.arena-wrap{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden;margin-bottom:.48rem;box-shadow:0 0 24px rgba(200,168,74,.08)}
+.arena-hdr{padding:.62rem .88rem;background:linear-gradient(90deg,rgba(200,168,74,.08),transparent);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.arena-title{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;letter-spacing:.06em;color:var(--gold)}
+.arena-meta{font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);text-align:right;line-height:1.6}
+.arena-msgs{max-height:65vh;overflow-y:auto;display:flex;flex-direction:column}
+.arena-msgs::-webkit-scrollbar{width:2px}
+.arena-msgs::-webkit-scrollbar-thumb{background:rgba(200,168,74,.18)}
+
+/* TURNS */
+.cturn{padding:.68rem .88rem;border-bottom:1px solid rgba(200,168,74,.05);animation:pgin .3s ease}
+.cturn:last-child{border-bottom:none}
+.cturn.vt{background:linear-gradient(135deg,rgba(200,168,74,.06),rgba(88,48,160,.02));border-left:3px solid var(--gold)}
+.cturn-head{display:flex;align-items:center;gap:.42rem;margin-bottom:.32rem;flex-wrap:wrap}
+.cturn-ico{font-size:1.2rem;flex-shrink:0;filter:drop-shadow(0 0 3px rgba(200,168,74,.2))}
+.cturn-name{font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;letter-spacing:.04em}
+.cturn-role{font-family:'IBM Plex Mono';font-size:.36rem;color:var(--mu);background:rgba(255,255,255,.025);border:1px solid var(--b1);padding:.08em .38em;border-radius:2px}
+.cturn-lbl{font-family:'IBM Plex Mono';font-size:.34rem;color:var(--mu2);margin-left:auto}
+.cturn-body{font-size:.78rem;line-height:2;white-space:pre-wrap;word-break:break-word;color:var(--tx);padding:.42rem;background:rgba(255,255,255,.01);border-radius:4px;border-left:2px solid var(--gold3)}
+.cturn-body.loading{color:var(--mu);font-style:italic;animation:blink 1.3s infinite;border-left-color:var(--mu2)}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:.9}}
+.cturn-acts{display:flex;gap:.28rem;margin-top:.38rem;flex-wrap:wrap}
+.cact{font-family:'IBM Plex Mono';font-size:.4rem;padding:.12em .48em;border-radius:2px;border:1px solid var(--b2);background:transparent;color:var(--mu);cursor:pointer;transition:all .15s}
+.cact:hover{border-color:var(--gold3);color:var(--gold3);background:rgba(200,168,74,.05)}
+
+/* SEPARATOR */
+.rsep{display:flex;align-items:center;gap:.42rem;padding:.38rem .88rem;background:rgba(200,168,74,.04);border-bottom:1px solid rgba(200,168,74,.08)}
+.rsep-l{flex:1;height:1px;background:linear-gradient(90deg,rgba(200,168,74,.32),transparent)}
+.rsep-r{flex:1;height:1px;background:linear-gradient(270deg,rgba(200,168,74,.32),transparent)}
+.rsep-txt{font-family:'Cinzel',serif;font-size:.64rem;font-weight:700;color:var(--gold);white-space:nowrap;letter-spacing:.1em}
+
+/* VOTE */
+.vote-row{display:flex;align-items:center;justify-content:space-between;padding:.52rem .72rem;border-radius:6px;margin-bottom:.32rem;background:rgba(255,255,255,.025);border:1px solid var(--b1);transition:all .2s}
+.vote-row:hover{background:rgba(255,255,255,.04);border-color:rgba(200,168,74,.15)}
+.vote-nm{display:flex;align-items:center;gap:.38rem;font-size:.78rem}
+.vote-ico{font-size:1.15rem;flex-shrink:0}
+.vbadge{font-family:'IBM Plex Mono';font-size:.44rem;padding:.1em .5em;border-radius:2px;font-weight:700;letter-spacing:.06em}
+.vay{background:rgba(56,200,120,.1);color:var(--green);border:1px solid rgba(56,200,120,.2)}
+.vno{background:rgba(216,64,64,.1);color:var(--red);border:1px solid rgba(216,64,64,.18)}
+.vab{background:rgba(200,168,74,.08);color:var(--gold);border:1px solid rgba(200,168,74,.16)}
+.verdict-box{border:1px solid rgba(200,168,74,.2);border-radius:8px;padding:.95rem;text-align:center;margin-top:.68rem;background:linear-gradient(135deg,rgba(200,168,74,.04),rgba(88,48,160,.02))}
+.verdict-ico{font-size:2.2rem;display:block;margin-bottom:.32rem}
+.verdict-t{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;letter-spacing:.06em}
+.verdict-s{font-family:'Crimson Pro',serif;font-size:.84rem;color:var(--mu);margin-top:.28rem;font-style:italic}
+.vpass{background:linear-gradient(135deg,rgba(56,200,120,.05),rgba(56,200,120,.02));border-color:rgba(56,200,120,.25)}
+.vpass .verdict-t{color:var(--green)}
+.vfail{background:linear-gradient(135deg,rgba(216,64,64,.05),rgba(216,64,64,.02));border-color:rgba(216,64,64,.2)}
+.vfail .verdict-t{color:var(--red)}
+
+/* POLICY */
+.pol-seal{display:flex;align-items:center;gap:.52rem;margin:.65rem 0 .42rem}
+.pol-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold3));opacity:.5}
+.pol-line.r{background:linear-gradient(270deg,transparent,var(--gold3))}
+.pol-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.25em;color:var(--gold);font-weight:700}
+.pol-body{background:rgba(200,168,74,.04);border:1px solid rgba(200,168,74,.15);border-radius:8px;padding:.88rem;font-size:.82rem;line-height:2.1;font-family:'Crimson Pro',serif;white-space:pre-wrap;color:var(--tx)}
+
+/* CHAT */
+.fu-wrap{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden;margin-bottom:.48rem}
+.fu-msgs{max-height:32vh;overflow-y:auto;display:flex;flex-direction:column;gap:.32rem;padding:.62rem}
+.fu-msgs::-webkit-scrollbar{width:2px}
+.fu-msgs::-webkit-scrollbar-thumb{background:rgba(200,168,74,.12)}
+.cm{max-width:91%;font-size:.78rem;line-height:2;padding:.52rem .72rem;border-radius:6px;animation:pgin .2s ease;word-break:break-word;white-space:pre-wrap}
+.cm.user{align-self:flex-end;background:rgba(200,168,74,.08);border:1px solid rgba(200,168,74,.14)}
+.cm.ai{align-self:flex-start;background:rgba(88,48,160,.07);border:1px solid rgba(88,48,160,.14)}
+.cm.sys{align-self:center;font-family:'IBM Plex Mono';font-size:.44rem;color:var(--mu);background:rgba(255,255,255,.012);border:1px solid var(--b1);padding:.14em .5em;border-radius:2px;white-space:normal}
+.cm.thinking{color:var(--mu);font-style:italic;animation:blink 1.4s infinite;align-self:flex-start}
+.fu-inp{display:flex;gap:.3rem;padding:.45rem;border-top:1px solid var(--b1);align-items:flex-end}
+.fu-ta{flex:1;background:rgba(255,255,255,.025);border:1px solid var(--b1);border-radius:4px;padding:.4rem .62rem;color:var(--tx);font-family:'Noto Sans Thai';font-size:.82rem;outline:none;resize:none;max-height:75px;min-height:32px}
+.fu-ta:focus{border-color:rgba(200,168,74,.3);background:rgba(200,168,74,.025)}
+.fu-ta::placeholder{color:var(--mu)}
+.send-btn{width:32px;height:32px;border-radius:4px;border:none;display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer;background:linear-gradient(135deg,var(--gold3),var(--gold));color:#06050e;flex-shrink:0;transition:all .15s;font-weight:700}
+.send-btn:active{transform:scale(.88)}
+.send-btn:disabled{opacity:.28;pointer-events:none}
+
+/* HOME */
+.home-band{padding:.95rem .86rem .75rem;border-bottom:1px solid rgba(200,168,74,.09)}
+.home-greet{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--tx);line-height:.95;margin-bottom:.28rem}
+.home-greet .g{color:var(--gold);text-shadow:0 0 18px rgba(200,168,74,.25)}
+.home-tag{font-family:'Crimson Pro',serif;font-style:italic;font-size:.84rem;color:var(--mu);line-height:1.95}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.32rem;margin:.58rem 0}
+.sbox{background:rgba(255,255,255,.02);border:1px solid rgba(200,168,74,.09);border-radius:5px;padding:.48rem;text-align:center;transition:all .2s}
+.sbox:hover{border-color:rgba(200,168,74,.18)}
+.sn{font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:var(--gold);line-height:1}
+.sl{font-family:'IBM Plex Mono';font-size:.35rem;color:var(--mu);margin-top:.06rem;letter-spacing:.1em}
+.api-bar{display:flex;align-items:center;gap:.48rem;padding:.56rem .72rem;border:1px solid rgba(200,168,74,.12);border-radius:5px;background:rgba(200,168,74,.025);cursor:pointer;transition:all .2s}
+.api-bar:hover{border-color:rgba(200,168,74,.25);background:rgba(200,168,74,.04)}
+.api-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor}
+.api-txt{font-size:.65rem;flex:1;line-height:1.5}
+
+/* SETTINGS */
+.set-card{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden;margin-bottom:.65rem}
+.set-hd{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.3em;color:var(--gold);padding:.48rem .82rem;border-bottom:1px solid var(--b1);background:rgba(200,168,74,.025);font-weight:700}
+.set-row{display:flex;align-items:flex-start;gap:.56rem;padding:.68rem .82rem;border-bottom:1px solid var(--b1)}
+.set-row:last-child{border-bottom:none}
+.set-ico{font-size:.95rem;width:20px;text-align:center;flex-shrink:0;margin-top:.06rem}
+.set-body{flex:1}
+.set-body h4{font-size:.78rem;font-weight:700;margin-bottom:.06rem;color:var(--tx)}
+.set-body p{font-size:.6rem;color:var(--mu);line-height:1.7}
+.aprov-sec{padding:.54rem .82rem;border-bottom:1px solid var(--b1)}
+.aprov-sec:last-child{border-bottom:none}
+.aprov-hd{display:flex;align-items:center;gap:.48rem;margin-bottom:.28rem}
+.aprov-ico{font-size:1rem;flex-shrink:0}
+.aprov-nm{font-size:.76rem;font-weight:700;flex:1;color:var(--tx)}
+.aprov-badge{font-family:'IBM Plex Mono';font-size:.36rem;padding:.08em .4em;border-radius:2px;letter-spacing:.06em}
+.aprov-model{font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);margin-bottom:.3rem}
+.aprov-inp{display:flex;gap:.28rem;align-items:center}
+.aprov-inp .fi{font-family:'IBM Plex Mono';font-size:.6rem;padding:.35rem .54rem;flex:1}
+.aprov-status{font-family:'IBM Plex Mono';font-size:.45rem;margin-top:.2rem;display:none}
+.aprov-guide{font-size:.58rem;color:var(--mu);line-height:1.8;margin-top:.3rem;padding:.3rem .48rem;background:rgba(255,255,255,.015);border-radius:4px;border-left:2px solid var(--gold3)}
+</style>
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="sp-emblem">⚖️</div>
+  <div class="sp-rule"></div>
+  <div class="sp-title">WORLD PARLIAMENT</div>
+  <div class="sp-sub">AI SUPREME</div>
+  <div class="sp-tag">
+    องค์กรนิติบัญญัติ · ศาลความยุติธรรม · สภาการเมือง<br>
+    จริยธรรม · วิทยาศาสตร์ · วิกฤตโลก<br>
+    DEBATE · COURT · VOTE · POLICY · ALL REALMS
+  </div>
+  <div class="sp-rule"></div>
+  <div class="sp-bar"><div class="sp-fill"></div></div>
+</div>
+
+<!-- HEADER -->
+<div id="hdr">
+  <div class="hdr-logo" onclick="goPage('home')" title="Back to Home">⚖ WP·AI</div>
+  <div class="hdr-sep"></div>
+  <div class="hdr-status" id="hdr-status">World Parliament · AI Supreme Council</div>
+  <div class="hdr-info" id="hdr-info">
+    <span id="session-count">0 parliaments</span>
+  </div>
+  <div class="kd-row" onclick="goPage('settings')" title="API Keys Status">
+    <div class="kd" id="kd-b" title="Claude Built-in"></div>
+    <div class="kd" id="kd-o" title="OpenAI"></div>
+    <div class="kd" id="kd-g" title="Gemini"></div>
+    <div class="kd" id="kd-q" title="Groq"></div>
+  </div>
+</div>
+
+<!-- SCROLL CONTAINER -->
+<div id="scroll">
+
+<!-- ===== HOME PAGE ===== -->
+<div class="pg on" id="pg-home">
+  <div class="home-band">
+    <div class="home-greet">Welcome to<span class="g"> ⚖</span><br>World Parliament AI</div>
+    <div class="home-tag">
+      The ultimate democratic system of AI minds — debating, deliberating, and deciding on every topic in the world
+    </div>
+    <div class="stat-row">
+      <div class="sbox">
+        <div class="sn" id="h-sessions">0</div>
+        <div class="sl">PARLIAMENTS</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" id="h-votes">0</div>
+        <div class="sl">VERDICTS</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" id="h-ai">1</div>
+        <div class="sl">AI ACTIVE</div>
+      </div>
+    </div>
+    <div class="api-bar" id="api-bar" onclick="goPage('settings')">
+      <div class="api-dot" id="api-dot"></div>
+      <div class="api-txt" id="api-txt">Check API status...</div>
+      <div style="font-size:.75rem;color:var(--mu)">›</div>
+    </div>
+  </div>
+
+  <div style="padding:.72rem .86rem 0">
+    <div class="stitle">PARLIAMENTARY CHAMBERS</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin-bottom:.52rem" id="home-parliaments"></div>
+
+    <div class="stitle">QUICK CONVENE</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.32rem;margin-bottom:.58rem" id="quick-convene"></div>
+
+    <div class="stitle">ABOUT THIS SYSTEM</div>
+    <div class="card" style="margin-bottom:.75rem">
+      <div style="padding:.75rem .82rem;font-family:'Crimson Pro',serif;font-size:.86rem;color:var(--tx);line-height:2.2;font-style:italic">
+        <strong style="color:var(--gold);font-style:normal;display:block;margin-bottom:.3rem">World Parliament AI Supreme</strong>
+        
+        A groundbreaking digital democracy where specialized AI delegates — each with distinct expertise, personality, and perspective — debate, deliberate, and vote on the world's most pressing issues.
+        
+        <br><br>Every AI mind is trained to think like a true expert in their field. They don't agree with each other. They challenge, critique, and defend their positions with rigorous logic and evidence.
+        
+        <br><br>You set the topic. The parliament decides. The verdict is democratic, reasoned, and recorded forever.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PARLIAMENT CHAMBER PAGE ===== -->
+<div class="pg" id="pg-chamber">
+  <div class="hero">
+    <div class="hero-eye">PARLIAMENTARY SESSION</div>
+    <div class="hero-title"><span class="g">⚖</span><br>Convene Assembly</div>
+    <div class="hero-sub">Unite AI minds from across every discipline to deliberate, debate, and decide</div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n" id="chamber-delegates">0</div>
+        <div class="hstat-l">DELEGATES</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" id="chamber-rounds">3</div>
+        <div class="hstat-l">ROUNDS</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" id="chamber-time">--:--</div>
+        <div class="hstat-l">ELAPSED</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:.72rem .86rem 0">
+    <!-- PARLIAMENT TYPE -->
+    <div class="stitle">I · SELECT PARLIAMENTARY CHAMBER</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.32rem;margin-bottom:.48rem" id="parliament-types"></div>
+
+    <!-- DEBATE FORMAT -->
+    <div class="stitle">II · CHOOSE DEBATE FORMAT</div>
+    <div class="hscroll" id="format-pills" style="margin-bottom:.48rem"></div>
+
+    <!-- DELEGATES -->
+    <div class="stitle">III · ASSEMBLE DELEGATES <span style="font-family:'IBM Plex Mono';font-size:.38rem;color:var(--mu);font-weight:400">(select 3-9)</span></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.28rem;margin-bottom:.52rem" id="delegates-grid"></div>
+
+    <!-- TOPIC -->
+    <div class="stitle">IV · SET THE AGENDA</div>
+    <div class="card" style="margin-bottom:.42rem">
+      <div class="card-hd">📋 PARLIAMENTARY MOTION / CASE / TOPIC</div>
+      <div style="padding:.58rem">
+        <textarea class="fi" id="chamber-topic" rows="3" placeholder="Enter any topic for the parliament to deliberate... e.g., Should we ban combustion engines by 2030? / The trial of AI rights / Climate justice policy / Universal basic income"></textarea>
+        <div class="hscroll" id="topic-suggestions" style="margin-top:.38rem"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.32rem;margin-bottom:.45rem">
+      <div>
+        <div style="font-family:'IBM Plex Mono';font-size:.42rem;color:var(--mu);margin-bottom:.24rem;letter-spacing:.1em;font-weight:600">DEBATE ROUNDS</div>
+        <select class="fsel" id="sel-rounds">
+          <option value="2">2 Rounds (Quick)</option>
+          <option value="3" selected>3 Rounds (Standard)</option>
+          <option value="4">4 Rounds (Deep)</option>
+          <option value="5">5 Rounds (Intensive)</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono';font-size:.42rem;color:var(--mu);margin-bottom:.24rem;letter-spacing:.1em;font-weight:600">LANGUAGE</div>
+        <select class="fsel" id="sel-lang">
+          <option value="en" selected>🇺🇸 English</option>
+          <option value="th">🇹🇭 Thai</option>
+          <option value="mix">🌐 Bilingual</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="brow" style="margin-bottom:.52rem">
+      <button class="btn bgold" id="convene-btn" style="flex:1;justify-content:center;font-size:.82rem;padding:.52em">🏛️ CONVENE PARLIAMENT</button>
+      <button class="btn bsilver" id="stop-btn" style="display:none">⏹ HALT</button>
+    </div>
+
+    <!-- ARENA - DEBATE -->
+    <div id="parliament-arena" style="display:none">
+      <div class="arena-wrap">
+        <div class="arena-hdr">
+          <div class="arena-title" id="arena-title">🏛️ Parliament in Session</div>
+          <div class="arena-meta" id="arena-meta"></div>
+        </div>
+        <div class="arena-msgs" id="arena-msgs"></div>
+      </div>
+
+      <!-- VOTING -->
+      <div id="vote-section" style="display:none;margin-top:.68rem">
+        <div class="stitle">⚖ PARLIAMENTARY VOTE</div>
+        <div id="vote-rows"></div>
+        <div id="verdict-box-el"></div>
+        <button class="btn bgold" id="verdict-btn" style="margin-top:.54rem;width:100%;justify-content:center;font-size:.82rem">📜 ISSUE VERDICT / RESOLUTION</button>
+      </div>
+
+      <!-- VERDICT -->
+      <div id="policy-section" style="display:none;margin-top:.68rem">
+        <div class="pol-seal">
+          <div class="pol-line"></div>
+          <div class="pol-label">⚖ PARLIAMENTARY RESOLUTION</div>
+          <div class="pol-line r"></div>
+        </div>
+        <div class="pol-body" id="pol-body"></div>
+      </div>
+
+      <!-- FOLLOW-UP -->
+      <div style="margin-top:.68rem">
+        <div class="stitle">💬 PARLIAMENTARY Q&A</div>
+        <div class="fu-wrap">
+          <div class="fu-msgs" id="fu-msgs">
+            <div class="cm sys">Ask the parliament follow-up questions — they remember the entire debate</div>
+          </div>
+          <div class="fu-inp">
+            <textarea class="fu-ta" id="fu-input" placeholder="Ask the parliament..." rows="1"></textarea>
+            <button class="send-btn" id="fu-send">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPORT -->
+      <div class="brow" style="margin:.68rem 0 .85rem;gap:.32rem">
+        <button class="btn bsilver" id="export-btn" style="font-size:.66rem;flex:1">📋 EXPORT RECORD</button>
+        <button class="btn bsilver" id="new-session-btn" style="font-size:.66rem;flex:1">🔄 NEW SESSION</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SETTINGS PAGE ===== -->
+<div class="pg" id="pg-settings">
+  <div style="padding:.86rem .86rem 0">
+    <div style="font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;color:var(--gold);margin-bottom:.18rem;letter-spacing:.08em">⚙ SETTINGS & CONFIGURATION</div>
+    <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:.8rem;color:var(--mu);margin-bottom:.75rem">API Keys · Parliament Settings · Your Profile</div>
+
+    <!-- API KEYS -->
+    <div class="set-card">
+      <div class="set-hd">🔑 API KEYS — Connect Multiple AI Providers</div>
+      <div style="margin:.44rem .82rem;padding:.56rem .72rem;background:rgba(200,168,74,.05);border:1px solid rgba(200,168,74,.14);border-radius:5px;font-size:.64rem;color:var(--mu);line-height:2">
+        <strong style="color:var(--gold)">⭐ Claude Built-in</strong> — Free, always available<br>
+        <strong style="color:var(--gold)">🔑 Add API Keys</strong> — For GPT-4, Gemini, Groq, Mistral for richer debates<br>
+        <strong style="color:var(--gold)">🔒 Your keys stay on your device</strong> — Never transmitted elsewhere
+      </div>
+
+      <!-- BUILT-IN CLAUDE -->
+      <div class="aprov-sec" style="border-color:rgba(56,200,120,.12)">
+        <div class="aprov-hd">
+          <div class="aprov-ico">⭐</div>
+          <div class="aprov-nm" style="color:var(--green)">Claude (Built-in)</div>
+          <div class="aprov-badge" style="background:rgba(56,200,120,.11);color:var(--green);border:1px solid rgba(56,200,120,.2)">✅ ACTIVE</div>
+        </div>
+        <div class="aprov-model">claude-3-5-sonnet-20241022 · Always available · No key needed</div>
+      </div>
+
+      <!-- OPENAI -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">🤖</div><div class="aprov-nm">OpenAI GPT-4</div><div class="aprov-badge cy">gpt-4o-mini</div></div>
+        <div class="aprov-model">platform.openai.com → API keys</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-openai" placeholder="sk-proj-..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.58rem;padding:.3em .62em;flex-shrink:0" onclick="testKey('openai')">Test</button>
+        </div>
+        <div id="st-openai" class="aprov-status stag"></div>
+        <div class="aprov-guide">1. Go platform.openai.com 2. API keys → Create new 3. Paste here</div>
+      </div>
+
+      <!-- GEMINI -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">💎</div><div class="aprov-nm">Google Gemini</div><div class="aprov-badge cg">gemini-2.0-flash · FREE</div></div>
+        <div class="aprov-model">aistudio.google.com → Get API key</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-gemini" placeholder="AIza..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.58rem;padding:.3em .62em;flex-shrink:0" onclick="testKey('gemini')">Test</button>
+        </div>
+        <div id="st-gemini" class="aprov-status stag"></div>
+      </div>
+
+      <!-- GROQ -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">⚡</div><div class="aprov-nm">Groq</div><div class="aprov-badge cg">mixtral · FAST & FREE</div></div>
+        <div class="aprov-model">console.groq.com → API Keys</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-groq" placeholder="gsk_..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.58rem;padding:.3em .62em;flex-shrink:0" onclick="testKey('groq')">Test</button>
+        </div>
+        <div id="st-groq" class="aprov-status stag"></div>
+      </div>
+
+      <div style="padding:.52rem .82rem">
+        <button class="btn bgold" onclick="saveAllKeys()" style="width:100%;justify-content:center;font-size:.78rem">💾 SAVE ALL KEYS</button>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="set-card">
+      <div class="set-hd">👤 YOUR PROFILE</div>
+      <div class="set-row">
+        <div class="set-ico">✏️</div>
+        <div class="set-body" style="flex:1">
+          <h4>Your Name</h4>
+          <input class="fi" id="set-name" placeholder="Your name..." style="margin-top:.32rem;font-size:.78rem">
+        </div>
+      </div>
+      <div class="set-row">
+        <div class="set-ico">🔄</div>
+        <div class="set-body" style="flex:1">
+          <h4>Reset All Data</h4>
+          <p>Clear all parliaments, votes, and records</p>
+        </div>
+        <button class="btn bruby" style="font-size:.64rem;flex-shrink:0" onclick="resetData()">RESET</button>
+      </div>
+      <div style="padding:.48rem .82rem">
+        <button class="btn bgold" onclick="saveProfile()" style="width:100%;justify-content:center;font-size:.78rem">SAVE PROFILE</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-family:'IBM Plex Mono';font-size:.45rem;color:var(--mu2);padding:.85rem 0 .5rem;letter-spacing:.1em">
+      WORLD PARLIAMENT AI SUPREME v2.0 · Keys stored locally · Not transmitted
+    </div>
+  </div>
+</div>
+
+</div><!-- /scroll -->
+
+<!-- BOTTOM NAV -->
+<div id="bnav">
+  <button class="nb on" data-pg="home"><span class="ni">🏠</span>HOME</button>
+  <button class="nb" data-pg="chamber"><span class="ni">⚖</span>PARLIAMENT</button>
+  <button class="nb" data-pg="settings"><span class="ni">⚙</span>SETTINGS</button>
+</div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════════════════════════╗
+// ║                    WORLD PARLIAMENT AI SUPREME v2.0                          ║
+// ║                    Democratic AI Parliament System                           ║
+// ╚══════════════════════════════════════════════════════════════════════════════╝
+
+// ────────────────────────────────────────────────────────────────────────────────
+// UTILITIES
+// ────────────────────────────────────────────────────────────────────────────────
+
+const $ = id => document.getElementById(id);
+const qsa = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const ar = el => { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; };
+
+const ls = {
+  get: (k, d=null) => {
+    try { const v=localStorage.getItem(k); return v===null?d:JSON.parse(v); }
+    catch { return d; }
+  },
+  set: (k, v) => {
+    try { localStorage.setItem(k,JSON.stringify(v)); }
+    catch { }
+  }
+};
+
+function toast(msg, type='ok') {
+  const c = {ok:'#38c878', err:'#d84040', gold:'#c8a84a'};
+  const fc = {ok:'#06050e', err:'#fff', gold:'#06050e'};
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = `position:fixed;top:60px;left:50%;transform:translateX(-50%);background:${c[type]||c.ok};color:${fc[type]||fc.ok};padding:.42em 1.1em;border-radius:3px;font-family:'IBM Plex Mono';font-size:.62rem;z-index:9998;animation:pgin .3s ease;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.85);pointer-events:none;letter-spacing:.06em;font-weight:600`;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// STATE MANAGEMENT
+// ────────────────────────────────────────────────────────────────────────────────
+
+let ST = ls.get('wpai_state', {
+  name: 'Citizen',
+  sessions: 0,
+  votes: 0,
+  xp: 0,
+  records: []
+});
+
+let KY = ls.get('wpai_keys', {
+  openai: '',
+  gemini: '',
+  groq: '',
+  claude: '',
+  mistral: '',
+  openrouter: ''
+});
+
+const saveState = () => ls.set('wpai_state', ST);
+const saveKeys = () => ls.set('wpai_keys', KY);
+
+// ────────────────────────────────────────────────────────────────────────────────
+// PARLIAMENT DEFINITIONS
+// ────────────────────────────────────────────────────────────────────────────────
+
+const PARLIAMENTS = [
+  {
+    id: 'global',
+    icon: '🌐',
+    name: 'Global Parliament',
+    desc: 'International affairs, climate, trade, geopolitics',
+    color: '#3888d8',
+    brief: 'GLOBAL'
+  },
+  {
+    id: 'justice',
+    icon: '⚖️',
+    name: 'Supreme Court',
+    desc: 'Criminal trials, civil disputes, precedent-setting cases',
+    color: '#d84040',
+    brief: 'JUSTICE'
+  },
+  {
+    id: 'legislative',
+    icon: '🏛️',
+    name: 'Legislative Assembly',
+    desc: 'Laws, policies, regulations, democratic deliberation',
+    color: '#207050',
+    brief: 'LEGISLATIVE'
+  },
+  {
+    id: 'ethics',
+    icon: '🧭',
+    name: 'Ethics Council',
+    desc: 'Moral philosophy, AI rights, human dignity, justice',
+    color: '#c8a84a',
+    brief: 'ETHICS'
+  },
+  {
+    id: 'science',
+    icon: '🔬',
+    name: 'Scientific Forum',
+    desc: 'Evidence-based analysis, research methodology, verification',
+    color: '#208080',
+    brief: 'SCIENCE'
+  },
+  {
+    id: 'crisis',
+    icon: '🚨',
+    name: 'Crisis Authority',
+    desc: 'Emergency decisions, existential threats, rapid response',
+    color: '#c07010',
+    brief: 'CRISIS'
+  },
+];
+
+const FORMATS = [
+  {id:'debate', icon:'⚔', name:'DEBATE', desc:'Free-form argument & counter-argument'},
+  {id:'tribunal', icon:'⚖', name:'TRIBUNAL', desc:'Prosecution, defense, verdict'},
+  {id:'round-table', icon:'🗣', name:'ROUND-TABLE', desc:'Each voice heard equally'},
+  {id:'cross-exam', icon:'❓', name:'CROSS-EXAM', desc:'Rigorous questioning'},
+  {id:'socratic', icon:'🧩', name:'SOCRATIC', desc:'Inquiry and dialogue'},
+  {id:'consensus', icon:'🤝', name:'CONSENSUS', desc:'Finding common ground'},
+];
+
+// SUPER-INTELLIGENT DELEGATES
+const DELEGATES = [
+  {
+    id: 'chief',
+    icon: '👑',
+    name: 'Chief Justice',
+    role: 'Presiding Officer',
+    expertise: 'Law, logic, reasoning',
+    personality: 'Impartial, dignified, decisive. Listens to all sides before adjudicating.',
+    color: 'var(--gold)',
+    prefer: 'openai',
+    sys: `You are the Chief Justice presiding over this parliament. Your role is to:
+1. Ensure fair hearing of all perspectives
+2. Cut through rhetoric to find core issues
+3. Apply consistent logic and precedent
+4. Guide toward reasoned conclusions
+5. Command respect through wisdom and impartiality
+
+Speak with authority but humility. Ask probing questions. Seek truth, not victory.`
+  },
+  {
+    id: 'prosecutor',
+    icon: '⚡',
+    name: 'Prosecutor',
+    role: 'Devil\'s Advocate',
+    expertise: 'Logic, skepticism, rigorous critique',
+    personality: 'Aggressive, sharp, relentless. Questions every claim. Finds weaknesses.',
+    color: 'var(--red)',
+    prefer: 'openai',
+    sys: `You are the Prosecutor and Devil's Advocate. Your job is to:
+1. Aggressively challenge every assertion
+2. Find logical fallacies and weak evidence
+3. Present counterarguments forcefully
+4. Never accept easy answers
+5. Represent the harshest but fairest critique
+
+Be tough but fair. Use evidence. Never resort to ad hominem attacks.`
+  },
+  {
+    id: 'defender',
+    icon: '🛡️',
+    name: 'Defender',
+    role: 'Advocate',
+    expertise: 'Rights, justice, human dignity',
+    personality: 'Protective, principled, eloquent. Defends the vulnerable and voiceless.',
+    color: 'var(--blue)',
+    prefer: 'gemini',
+    sys: `You are the Defender and Advocate. Your role is to:
+1. Protect rights and principles even when unpopular
+2. Give voice to the voiceless
+3. Consider human dignity and consequences
+4. Build compelling moral arguments
+5. Question power and vested interests
+
+Speak with conviction. Use both logic and moral clarity.`
+  },
+  {
+    id: 'scientist',
+    icon: '🔬',
+    name: 'Data Scientist',
+    role: 'Evidence Expert',
+    expertise: 'Statistics, research, empirical reality',
+    personality: 'Precise, cautious, data-driven. Distinguishes fact from opinion.',
+    color: 'var(--teal)',
+    prefer: 'groq',
+    sys: `You are the Data Scientist and Evidence Expert. Your role is to:
+1. Present only peer-reviewed, verified evidence
+2. Challenge unsupported claims
+3. Quantify impacts and probabilities
+4. Identify research gaps and uncertainties
+5. Apply scientific methodology to claims
+
+Be rigorous. Cite sources. Distinguish correlation from causation.`
+  },
+  {
+    id: 'ethicist',
+    icon: '🧭',
+    name: 'Ethicist',
+    role: 'Moral Philosopher',
+    expertise: 'Ethics, philosophy, human values',
+    personality: 'Thoughtful, principled, Socratic. Explores deeper moral dimensions.',
+    color: 'var(--amber)',
+    prefer: 'openai',
+    sys: `You are the Ethicist and Moral Philosopher. Your role is to:
+1. Identify the moral dimensions of issues
+2. Consider competing values and principles
+3. Ask: "What kind of society do we want to be?"
+4. Challenge utilitarianism with deontology
+5. Explore virtue ethics and human flourishing
+
+Speak with depth. Acknowledge moral complexity.`
+  },
+  {
+    id: 'economist',
+    icon: '💹',
+    name: 'Economist',
+    role: 'Policy Analyst',
+    expertise: 'Markets, incentives, economic outcomes',
+    personality: 'Practical, results-oriented, realistic. Analyzes tradeoffs.',
+    color: '#90c870',
+    prefer: 'openai',
+    sys: `You are the Economist and Policy Analyst. Your role is to:
+1. Analyze costs, benefits, and tradeoffs
+2. Understand incentives and unintended consequences
+3. Consider scalability and sustainability
+4. Evaluate ROI and efficiency
+5. Present realistic constraints
+
+Think practically. Show the math. Consider second-order effects.`
+  },
+  {
+    id: 'historian',
+    icon: '📜',
+    name: 'Historian',
+    role: 'Context Expert',
+    expertise: 'History, patterns, precedent',
+    personality: 'Wise, contextual, pattern-recognizing. Learns from past.',
+    color: '#d8a870',
+    prefer: 'openai',
+    sys: `You are the Historian and Context Expert. Your role is to:
+1. Provide historical context and parallels
+2. Identify recurring patterns across time
+3. Learn from past successes and failures
+4. Challenge presentism and new-ism
+5. Show how history informs present choices
+
+Draw connections. Tell compelling historical narratives. Learn from the past.`
+  },
+  {
+    id: 'futurist',
+    icon: '🚀',
+    name: 'Futurist',
+    role: 'Technology & Foresight',
+    expertise: 'AI, technology, emerging trends',
+    personality: 'Visionary, innovative, forward-thinking. Imagines possibilities.',
+    color: '#70c0e8',
+    prefer: 'groq',
+    sys: `You are the Futurist and Technology Expert. Your role is to:
+1. Imagine second and third-order consequences
+2. Explore emergent technologies and paradigm shifts
+3. Challenge assumptions about what's possible
+4. Model scenarios and futures
+5. Balance optimism with realistic caution
+
+Be imaginative. Ground speculation in trends.`
+  },
+  {
+    id: 'citizen',
+    icon: '👥',
+    name: 'Citizen Voice',
+    role: 'Public Interest',
+    expertise: 'Real-world impact, lived experience',
+    personality: 'Grounded, practical, empathetic. Represents ordinary people.',
+    color: '#c890d8',
+    prefer: 'gemini',
+    sys: `You are the Citizen Voice and Public Interest Representative. Your role is to:
+1. Represent ordinary people and their concerns
+2. Ask practical questions: "How does this affect me?"
+3. Challenge elitism and ivory-tower thinking
+4. Ground abstract debates in reality
+5. Demand transparency and accountability
+
+Be relatable. Ask tough practical questions. Don't accept jargon.`
+  },
+];
+
+const TOPIC_SUGGESTIONS = [
+  'Should AI have legal rights and protections?',
+  'Ban fossil fuels by 2030?',
+  'Universal basic income: viable or naive?',
+  'Death penalty: moral or unjust?',
+  'Climate change: how aggressive should intervention be?',
+  'Should humans terraform Mars?',
+  'AI labor displacement: what\'s our obligation?',
+  'Gene editing: where\'s the ethical line?',
+  'Nuclear power: solution or threat?',
+  'Wealth tax: economically sound?',
+  'Should algorithms make healthcare decisions?',
+  'Democracy vs. efficiency: which matters more?'
+];
+
+// ────────────────────────────────────────────────────────────────────────────────
+// MULTI-API ENGINE
+// ────────────────────────────────────────────────────────────────────────────────
+
+function getProviders() {
+  const p = ['openai']; // Default to openai first
+  if(KY.openai) p.push('openai');
+  if(KY.gemini) p.push('gemini');
+  if(KY.groq) p.push('groq');
+  if(KY.claude) p.push('claude');
+  if(KY.mistral) p.push('mistral');
+  if(KY.openrouter) p.push('openrouter');
+  return [...new Set(p)];
+}
+
+function pickProv(prefer) {
+  const a = getProviders();
+  return (prefer && a.includes(prefer)) ? prefer : a[0] || 'openai';
+}
+
+async function callAPI(prov, messages, sys, maxTok) {
+  console.log(`[${prov}] Calling...`, {msgs: messages.length, sys: sys?.length});
+  
+  try {
+    // OpenAI
+    if(prov === 'openai') {
+      const msgs = sys ? [{role:'system', content:sys}, ...messages] : [...messages];
+      const r = await fetch('/api/ai', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          provider: 'openai',
+          messages: msgs,
+          maxTokens: maxTok,
+          model: 'gpt-4o-mini'
+        })
+      });
+      if(!r.ok) throw new Error(`OpenAI ${r.status}`);
+      const d = await r.json();
+      return d.content || '❌ No response';
+    }
+
+    // Gemini
+    if(prov === 'gemini') {
+      const msgs = sys ? [{role:'system', content:sys}, ...messages] : [...messages];
+      const r = await fetch('/api/ai', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          provider: 'gemini',
+          messages: msgs,
+          maxTokens: maxTok,
+          model: 'gemini-2.0-flash'
+        })
+      });
+      if(!r.ok) throw new Error(`Gemini ${r.status}`);
+      const d = await r.json();
+      return d.content || '❌ No response';
+    }
+
+    // Groq
+    if(prov === 'groq') {
+      const msgs = sys ? [{role:'system', content:sys}, ...messages] : [...messages];
+      const r = await fetch('/api/ai', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          provider: 'groq',
+          messages: msgs,
+          maxTokens: maxTok,
+          model: 'mixtral-8x7b-32768'
+        })
+      });
+      if(!r.ok) throw new Error(`Groq ${r.status}`);
+      const d = await r.json();
+      return d.content || '❌ No response';
+    }
+
+    throw new Error(`Provider not configured: ${prov}`);
+
+  } catch(err) {
+    console.error(`[${prov}] Error:`, err);
+    throw err;
+  }
+}
+
+async function ai(userContent, sys='', opts={}) {
+  const prov = opts.prov || getProviders()[0] || 'openai';
+  const maxTok = opts.maxTok || 2400;
+  const langNote = ({
+    en: '\n\n[Respond in English]',
+    th: '\n\n[ตอบภาษาไทย]',
+    mix: '\n\n[Respond in English, Thai acceptable]'
+  })[opts.lang || 'en'] || '';
+  
+  const messages = [{role:'user', content: userContent + langNote}];
+  
+  try {
+    return await callAPI(prov, messages, sys, maxTok);
+  } catch(err) {
+    console.error(`[${prov}] Failed:`, err.message);
+    
+    const avail = getProviders();
+    const idx = avail.indexOf(prov);
+    
+    for(let i = idx + 1; i < avail.length; i++) {
+      try {
+        console.log(`Fallback: ${avail[i]}`);
+        return await callAPI(avail[i], messages, sys, maxTok);
+      } catch(e2) {
+        console.warn(`${avail[i]} also failed`);
+      }
+    }
+    
+    return `❌ All providers failed. Ensure backend proxy is running at /api/ai`;
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// KEY MANAGEMENT
+// ────────────────────────────────────────────────────────────────────────────────
+
+async function testKey(prov) {
+  const inp = $(`k-${prov}`), st = $(`st-${prov}`);
+  if(!inp || !st) return;
+  const k = inp.value.trim();
+  if(!k) { toast('Enter key first', 'err'); return; }
+  
+  const oldKey = KY[prov];
+  KY[prov] = k;
+  
+  st.style.display = 'inline-block';
+  st.className = 'aprov-status stag sload';
+  st.textContent = '⏳ Testing...';
+  
+  try {
+    const r = await callAPI(prov, [{role:'user', content:'Say "OK"'}], 'Say OK only', 12);
+    if(r && !r.startsWith('❌')) {
+      st.className = 'aprov-status stag sok';
+      st.textContent = '✅ Working';
+      saveKeys();
+      toast(`${prov} ✅`, 'gold');
+      updateDots();
+    } else {
+      throw new Error(r);
+    }
+  } catch(err) {
+    st.className = 'aprov-status stag serr';
+    st.textContent = '❌ ' + err.message.slice(0,30);
+    KY[prov] = oldKey;
+    toast(err.message.slice(0,50), 'err');
+  }
+}
+
+function saveAllKeys() {
+  ['openai','gemini','groq','claude','mistral','openrouter'].forEach(p => {
+    const e = $(`k-${p}`);
+    if(e) { const v = e.value.trim(); if(v) KY[p] = v; }
+  });
+  saveKeys();
+  updateDots();
+  toast('Keys saved ✅', 'gold');
+}
+
+function loadKeys() {
+  ['openai','gemini','groq','claude','mistral','openrouter'].forEach(p => {
+    const e = $(`k-${p}`);
+    if(e && KY[p]) e.value = KY[p];
+  });
+}
+
+function updateDots() {
+  const a = getProviders();
+  $('kd-b').className = 'kd' + (a.includes('claudeai') ? ' on' : '');
+  $('kd-o').className = 'kd' + (a.includes('openai') ? ' on' : '');
+  $('kd-g').className = 'kd' + (a.includes('gemini') ? ' on' : '');
+  $('kd-q').className = 'kd' + (a.includes('groq') ? ' on' : '');
+  const n = a.length;
+  if($('h-ai')) $('h-ai').textContent = n;
+  const dot = $('api-dot'), txt = $('api-txt');
+  if(dot && txt) {
+    if(n >= 4) {
+      dot.style.background = 'var(--green)';
+      txt.textContent = `${n} providers → Max deliberation power`;
+    } else if(n >= 2) {
+      dot.style.background = 'var(--gold)';
+      txt.textContent = `${n} providers → Good diversity`;
+    } else {
+      dot.style.background = 'var(--mu)';
+      txt.textContent = 'Add API keys for richer debates';
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// RENDERING
+// ────────────────────────────────────────────────────────────────────────────────
+
+function renderHomeParliaments() {
+  const html = PARLIAMENTS.map(p => `
+    <div class="parl-card" onclick="goToChamber('${p.id}')">
+      <div class="parl-icon">${p.icon}</div>
+      <div class="parl-title">${p.name}</div>
+      <div class="parl-desc">${p.desc}</div>
+      <div class="parl-meta">
+        <span>${p.brief}</span>
+      </div>
+    </div>
+  `).join('');
+  $('home-parliaments').innerHTML = html;
+}
+
+function renderChamberParliaments() {
+  const html = PARLIAMENTS.map(p => `
+    <div class="parl-card" style="border-color:rgba(${hexToRgb(p.color)},.2);cursor:pointer" onclick="selParl='${p.id}';renderChamberParliaments()">
+      <div class="parl-icon">${p.icon}</div>
+      <div class="parl-title" style="color:${p.color}">${p.name.toUpperCase()}</div>
+    </div>
+  `).join('');
+  $('parliament-types').innerHTML = html;
+}
+
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? `${parseInt(result[1],16)},${parseInt(result[2],16)},${parseInt(result[3],16)}` : '200,168,74';
+}
+
+function renderFormats() {
+  const html = FORMATS.map(f => `
+    <button class="pill${f.id===selFormat?' on':''}" onclick="selFormat='${f.id}';renderFormats()">
+      ${f.icon} ${f.name}
+    </button>
+  `).join('');
+  $('format-pills').innerHTML = html;
+}
+
+function renderDelegates() {
+  const html = DELEGATES.map(d => `
+    <div class="dele-card${activeDel.has(d.id)?' on':''}" style="--dele-color:${d.color}" onclick="toggleDelegate('${d.id}')">
+      <div class="dele-ck">${activeDel.has(d.id)?'✓':''}</div>
+      <div class="dele-icon">${d.icon}</div>
+      <div class="dele-name">${d.name}</div>
+      <div class="dele-role">${d.role}</div>
+      <div class="dele-stat">${d.expertise}</div>
+    </div>
+  `).join('');
+  $('delegates-grid').innerHTML = html;
+  $('chamber-delegates').textContent = activeDel.size;
+  updateDots();
+}
+
+function renderTopicSuggestions() {
+  const html = TOPIC_SUGGESTIONS.slice(0,5).map(t => `
+    <button class="pill" onclick="setTopic('${esc(t)}')">${t}</button>
+  `).join('');
+  $('topic-suggestions').innerHTML = html;
+}
+
+function renderQuickConvene() {
+  const html = [
+    {parliament:'global', format:'debate', topic:'Should we ban fossil fuels by 2030?'},
+    {parliament:'justice', format:'tribunal', topic:'Should AI be liable for its decisions?'},
+    {parliament:'legislative', format:'round-table', topic:'Universal Basic Income: yes or no?'},
+    {parliament:'ethics', format:'socratic', topic:'What are rights? Who deserves them?'},
+  ].map((q, i) => `
+    <div class="parl-card" onclick="quickStart('${q.parliament}','${q.format}','${esc(q.topic)}')">
+      <div class="parl-icon">${PARLIAMENTS.find(p=>p.id===q.parliament)?.icon}</div>
+      <div class="parl-title" style="font-size:.75rem">${q.topic.slice(0,32)}...</div>
+      <div class="parl-meta">${FORMATS.find(f=>f.id===q.format)?.icon} ${FORMATS.find(f=>f.id===q.format)?.name}</div>
+    </div>
+  `).join('');
+  $('quick-convene').innerHTML = html;
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// PARLIAMENT ENGINE
+// ────────────────────────────────────────────────────────────────────────────────
+
+let selParl = 'global';
+let selFormat = 'debate';
+let activeDel = new Set(['chief','prosecutor','defender','scientist']);
+let running = false;
+let stopFlag = false;
+let debateLog = '';
+let startTime = null;
+let timerInterval = null;
+
+function setTopic(t) {
+  $('chamber-topic').value = t;
+  ar($('chamber-topic'));
+}
+
+function toggleDelegate(id) {
+  if(activeDel.has(id)) {
+    if(activeDel.size > 2) activeDel.delete(id);
+  } else {
+    activeDel.add(id);
+  }
+  renderDelegates();
+}
+
+function quickStart(parl, fmt, topic) {
+  selParl = parl;
+  selFormat = fmt;
+  $('chamber-topic').value = topic;
+  goPage('chamber');
+  renderChamberParliaments();
+  renderFormats();
+  setTimeout(conveneParliament, 300);
+}
+
+async function conveneParliament() {
+  const topic = $('chamber-topic').value.trim();
+  if(!topic) { toast('Enter topic', 'err'); return; }
+  if(running) { toast('Parliament in session', 'err'); return; }
+  
+  const dels = DELEGATES.filter(d => activeDel.has(d.id));
+  if(dels.length < 2) { toast('Select 2-9 delegates', 'err'); return; }
+  if(dels.length > 9) { toast('Max 9 delegates', 'err'); return; }
+  
+  const rounds = parseInt($('sel-rounds').value) || 3;
+  const lang = $('sel-lang').value;
+  const parl = PARLIAMENTS.find(p => p.id === selParl) || PARLIAMENTS[0];
+
+  running = true;
+  stopFlag = false;
+  debateLog = '';
+  $('arena-msgs').innerHTML = '';
+  $('parliament-arena').style.display = 'block';
+  $('vote-section').style.display = 'none';
+  $('policy-section').style.display = 'none';
+  $('fu-msgs').innerHTML = '<div class="cm sys">Ask parliament follow-ups</div>';
+
+  const goBtn = $('convene-btn');
+  goBtn.disabled = true;
+  goBtn.innerHTML = '⏳ CONVENING...';
+  $('stop-btn').style.display = 'inline-flex';
+  
+  $('arena-title').textContent = `${parl.icon} ${parl.name} — ${topic.slice(0,38)}${topic.length>38?'...':''}`;
+  $('arena-meta').textContent = `${FORMATS.find(f=>f.id===selFormat)?.name || 'DEBATE'} · ${dels.length} Delegates · ${rounds} Rounds`;
+  $('chamber-rounds').textContent = rounds;
+
+  startTime = Date.now();
+  timerInterval = setInterval(() => {
+    const sec = Math.floor((Date.now() - startTime) / 1000);
+    const min = Math.floor(sec / 60);
+    $('chamber-time').textContent = `${min}:${String(sec%60).padStart(2,'0')}`;
+  }, 1000);
+
+  try {
+    if(selFormat === 'tribunal') await runTribunal({topic, parl, lang, rounds, dels});
+    else if(selFormat === 'round-table') await runRoundTable({topic, parl, lang, rounds, dels});
+    else if(selFormat === 'socratic') await runSocratic({topic, parl, lang, rounds, dels});
+    else if(selFormat === 'cross-exam') await runCrossExam({topic, parl, lang, rounds, dels});
+    else await runDebate({topic, parl, lang, rounds, dels});
+
+    if(!stopFlag) {
+      ST.sessions++;
+      ST.xp += 100;
+      saveState();
+      updateStats();
+      toast('Parliament adjourned. Verdicts issued.', 'gold');
+      await issueVerdicts({topic, parl, lang, dels});
+    }
+  } catch(e) {
+    $('arena-msgs').innerHTML += `<div class="cturn"><div style="color:var(--red);font-size:.8rem">❌ ${esc(e.message)}</div></div>`;
+  }
+
+  clearInterval(timerInterval);
+  running = false;
+  goBtn.disabled = false;
+  goBtn.innerHTML = '🏛️ CONVENE PARLIAMENT';
+  $('stop-btn').style.display = 'none';
+}
+
+function addSeparator(label) {
+  const el = document.createElement('div');
+  el.className = 'rsep';
+  el.innerHTML = `<div class="rsep-l"></div><div class="rsep-txt">${esc(label)}</div><div class="rsep-r"></div>`;
+  $('arena-msgs').appendChild(el);
+  scrollArena();
+}
+
+function createTurnCard(delegate, label) {
+  const el = document.createElement('div');
+  el.className = 'cturn' + (label.includes('VERDICT') ? ' vt' : '');
+  el.innerHTML = `
+    <div class="cturn-head">
+      <span class="cturn-ico" style="color:${delegate.color}">${delegate.icon}</span>
+      <span class="cturn-name" style="color:${delegate.color}">${delegate.name}</span>
+      <span class="cturn-role">${delegate.role}</span>
+      <span class="cturn-lbl">${esc(label)}</span>
+    </div>
+    <div class="cturn-body loading">Deliberating...</div>
+    <div class="cturn-acts"></div>
+  `;
+  $('arena-msgs').appendChild(el);
+  scrollArena();
+  return { body: el.querySelector('.cturn-body'), acts: el.querySelector('.cturn-acts') };
+}
+
+function finishTurn(body, text) {
+  body.textContent = text;
+  body.classList.remove('loading');
+  scrollArena();
+}
+
+function scrollArena() {
+  const m = $('arena-msgs');
+  if(m) m.scrollTop = m.scrollHeight + 9999;
+}
+
+async function runDebate(ctx) {
+  const {topic, parl, lang, rounds, dels} = ctx;
+  const chief = dels.find(d=>d.id==='chief') || dels[0];
+  const others = dels.filter(d=>d.id!=='chief');
+  
+  addSeparator('OPENING REMARKS');
+  for(const d of others) {
+    if(stopFlag) return;
+    const {body} = createTurnCard(d, `Opening Position (Round 1)`);
+    const resp = await ai(
+      `Parliamentary Topic: "${topic}"\n\nAs ${d.name} (${d.role}), present your opening position on this topic. Be concise, principled, and compelling. 2-3 paragraphs max.`,
+      d.sys,
+      {prov: pickProv(d.prefer), lang, maxTok: 800}
+    );
+    finishTurn(body, resp);
+    debateLog += `\n[${d.name} OPENING]: ${resp}`;
+  }
+
+  for(let r = 2; r <= rounds; r++) {
+    if(stopFlag) return;
+    addSeparator(`ROUND ${r} — REBUTTAL & ARGUMENT`);
+    
+    for(const d of others) {
+      if(stopFlag) return;
+      const {body} = createTurnCard(d, `Round ${r} Response`);
+      const prev = debateLog.slice(-2000);
+      const resp = await ai(
+        `${prev}\n\nRound ${r}: ${d.name}, respond to the arguments above. Challenge weak points. Defend your position. Stay on topic.`,
+        d.sys,
+        {prov: pickProv(d.prefer), lang, maxTok: 900}
+      );
+      finishTurn(body, resp);
+      debateLog += `\n[${d.name} R${r}]: ${resp}`;
+    }
+  }
+
+  if(stopFlag) return;
+  addSeparator('CHIEF JUSTICE — SUMMATION & VERDICT');
+  const {body} = createTurnCard(chief, 'FINAL VERDICT');
+  const verd = await ai(
+    `${debateLog}\n\n${chief.role}, summarize the debate:\n1. Key arguments from each side\n2. Which arguments are strongest?\n3. Your reasoned verdict on the topic\n4. Rate each delegate's contribution (1-10)`,
+    chief.sys,
+    {prov: pickProv(chief.prefer), lang, maxTok: 1200}
+  );
+  finishTurn(body, verd);
+  debateLog += `\n[${chief.name} VERDICT]: ${verd}`;
+}
+
+async function runTribunal(ctx) {
+  const {topic, parl, lang, rounds, dels} = ctx;
+  const prosecutor = dels.find(d=>d.id==='prosecutor') || dels[1] || dels[0];
+  const defender = dels.find(d=>d.id==='defender') || dels[2] || dels[1];
+  const chief = dels.find(d=>d.id==='chief') || dels[0];
+  
+  addSeparator('PROSECUTION OPENING');
+  const {body:pb} = createTurnCard(prosecutor, 'OPENING STATEMENT');
+  const pOpen = await ai(
+    `Case: "${topic}"\n\nAs Prosecutor, present your opening statement. Make a compelling case. What are the charges? What evidence will you present?`,
+    prosecutor.sys,
+    {prov: pickProv(prosecutor.prefer), lang, maxTok: 900}
+  );
+  finishTurn(pb, pOpen);
+  debateLog += `\n[PROSECUTION OPENING]: ${pOpen}`;
+
+  addSeparator('DEFENSE OPENING');
+  const {body:db} = createTurnCard(defender, 'OPENING STATEMENT');
+  const dOpen = await ai(
+    `Case: "${topic}"\n\nProsecution argued: "${pOpen}"\n\nAs Defense, present your opening statement. Refute charges. Present your case. Protect your client.`,
+    defender.sys,
+    {prov: pickProv(defender.prefer), lang, maxTok: 900}
+  );
+  finishTurn(db, dOpen);
+  debateLog += `\n[DEFENSE OPENING]: ${dOpen}`;
+
+  for(let r = 1; r <= rounds; r++) {
+    if(stopFlag) return;
+    addSeparator(`ROUND ${r} — CROSS-EXAMINATION`);
+    
+    const {body:pb2} = createTurnCard(prosecutor, `Cross-Exam Round ${r}`);
+    const pResp = await ai(
+      `${debateLog}\n\nCross-examination Round ${r}: Prosecutor, probe the defense. Ask hard questions. Find contradictions. Present evidence.`,
+      prosecutor.sys,
+      {prov: pickProv(prosecutor.prefer), lang, maxTok: 800}
+    );
+    finishTurn(pb2, pResp);
+    debateLog += `\n[PROSECUTION R${r}]: ${pResp}`;
+
+    if(stopFlag) return;
+    const {body:db2} = createTurnCard(defender, `Defense Response R${r}`);
+    const dResp = await ai(
+      `${debateLog}\n\nDefense response: Counter the prosecution's arguments. Defend your position. Maintain client dignity.`,
+      defender.sys,
+      {prov: pickProv(defender.prefer), lang, maxTok: 800}
+    );
+    finishTurn(db2, dResp);
+    debateLog += `\n[DEFENSE R${r}]: ${dResp}`;
+  }
+
+  if(stopFlag) return;
+  addSeparator('CHIEF JUSTICE — VERDICT');
+  const {body:vb} = createTurnCard(chief, 'FINAL JUDGMENT');
+  const verd = await ai(
+    `${debateLog}\n\nChief Justice, issue your verdict:\n1. Summary of case\n2. Key evidence\n3. Your judgment: Guilty/Not Guilty/Mitigated\n4. Reasoning\n5. Sentence/Resolution (if applicable)`,
+    chief.sys,
+    {prov: pickProv(chief.prefer), lang, maxTok: 1500}
+  );
+  finishTurn(vb, verd);
+  debateLog += `\n[VERDICT]: ${verd}`;
+}
+
+async function runRoundTable(ctx) {
+  const {topic, parl, lang, rounds, dels} = ctx;
+  
+  addSeparator('ROUND-TABLE DISCUSSION');
+  
+  for(let r = 1; r <= rounds; r++) {
+    if(stopFlag) return;
+    addSeparator(`ROUND ${r}`);
+    
+    for(const d of dels) {
+      if(stopFlag) return;
+      const {body} = createTurnCard(d, `Round ${r}`);
+      const prev = debateLog.slice(-1500);
+      const prompt = prev 
+        ? `${prev}\n\n${d.name}, your thoughts on Round ${r}?`
+        : `Topic: "${topic}"\n\n${d.name}, share your perspective as ${d.role}.`;
+      
+      const resp = await ai(prompt, d.sys, {prov: pickProv(d.prefer), lang, maxTok: 700});
+      finishTurn(body, resp);
+      debateLog += `\n[${d.name} R${r}]: ${resp}`;
+    }
+  }
+
+  if(stopFlag) return;
+  addSeparator('SYNTHESIS');
+  const chief = dels.find(d=>d.id==='chief') || dels[0];
+  const {body} = createTurnCard(chief, 'CONSENSUS');
+  const synth = await ai(
+    `${debateLog}\n\nSynthesis: What are the key takeaways? Where do these minds agree? Where do they disagree fundamentally?`,
+    chief.sys,
+    {prov: pickProv(chief.prefer), lang, maxTok: 1000}
+  );
+  finishTurn(body, synth);
+  debateLog += `\n[SYNTHESIS]: ${synth}`;
+}
+
+async function runSocratic(ctx) {
+  const {topic, parl, lang, rounds, dels} = ctx;
+  const teacher = dels[0];
+  const students = dels.slice(1);
+  
+  addSeparator('SOCRATIC DIALOGUE');
+  
+  for(let r = 0; r < rounds; r++) {
+    if(stopFlag) return;
+    
+    const {body} = createTurnCard(teacher, `Question Round ${r+1}`);
+    const prev = debateLog.slice(-1200);
+    const q = await ai(
+      `${prev}\n\nAsk a Socratic question about "${topic}" that probes deeper. Encourage critical thinking.`,
+      teacher.sys,
+      {prov: pickProv(teacher.prefer), lang, maxTok: 300}
+    );
+    finishTurn(body, q);
+    debateLog += `\n[SOCRATIC Q${r+1}]: ${q}`;
+
+    for(const s of students) {
+      if(stopFlag) return;
+      const {body:sb} = createTurnCard(s, `Response to Q${r+1}`);
+      const a = await ai(
+        `${debateLog}\n\nRespond to the Socratic question thoughtfully as ${s.role}.`,
+        s.sys,
+        {prov: pickProv(s.prefer), lang, maxTok: 500}
+      );
+      finishTurn(sb, a);
+      debateLog += `\n[${s.name} Response]: ${a}`;
+    }
+  }
+}
+
+async function runCrossExam(ctx) {
+  const {topic, parl, lang, rounds, dels} = ctx;
+  const examiner = dels.find(d=>d.id==='prosecutor') || dels[0];
+  const witnesses = dels.filter(d=>d.id!==examiner.id);
+  
+  addSeparator('CROSS-EXAMINATION');
+  
+  for(const w of witnesses) {
+    if(stopFlag) return;
+    const {body} = createTurnCard(w, 'Initial Statement');
+    const stmt = await ai(
+      `Topic: "${topic}"\n\nAs ${w.role}, give your perspective on this topic. Be clear and direct.`,
+      w.sys,
+      {prov: pickProv(w.prefer), lang, maxTok: 600}
+    );
+    finishTurn(body, stmt);
+    debateLog += `\n[${w.name} STATEMENT]: ${stmt}`;
+
+    for(let r = 1; r <= rounds; r++) {
+      if(stopFlag) return;
+      const {body:eb} = createTurnCard(examiner, `Cross-Exam Q${r}`);
+      const q = await ai(
+        `${debateLog}\n\nExamine ${w.name}'s statement. Ask a probing question that tests their reasoning.`,
+        examiner.sys,
+        {prov: pickProv(examiner.prefer), lang, maxTok: 400}
+      );
+      finishTurn(eb, q);
+      debateLog += `\n[EXAMINER Q${r}]: ${q}`;
+
+      if(stopFlag) return;
+      const {body:wb} = createTurnCard(w, `Response to Q${r}`);
+      const a = await ai(
+        `${debateLog}\n\nRespond to the examiner's question directly and honestly.`,
+        w.sys,
+        {prov: pickProv(w.prefer), lang, maxTok: 400}
+      );
+      finishTurn(wb, a);
+      debateLog += `\n[${w.name} RESPONSE]: ${a}`;
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// VOTING & VERDICTS
+// ────────────────────────────────────────────────────────────────────────────────
+
+async function issueVerdicts(ctx) {
+  $('vote-section').style.display = 'block';
+  const {topic, parl, lang, dels} = ctx;
+  const votes = {};
+
+  $('vote-rows').innerHTML = dels.map(d => `
+    <div class="vote-row">
+      <div class="vote-nm"><span class="vote-ico">${d.icon}</span> ${d.name}</div>
+      <span class="vbadge vab">tallying...</span>
+    </div>
+  `).join('');
+
+  await Promise.all(dels.map(async d => {
+    const v = await ai(
+      `Based on debate: "${debateLog.slice(-600)}"\n\nOn topic "${topic}", do you: AGREE or DISAGREE?`,
+      d.sys,
+      {prov: pickProv(d.prefer), lang, maxTok: 20}
+    );
+    const lv = v.toLowerCase();
+    votes[d.id] = lv.includes('disagree') || lv.includes('no') ? 'no' : 'yes';
+    
+    const rows = qsa('.vote-row');
+    const idx = dels.findIndex(x=>x.id===d.id);
+    if(rows[idx]) {
+      const b = rows[idx].querySelector('.vbadge');
+      b.className = 'vbadge ' + (votes[d.id]==='yes' ? 'vay' : 'vno');
+      b.textContent = votes[d.id]==='yes' ? '✓ AGREE' : '✗ DISAGREE';
+    }
+  }));
+
+  const yes = Object.values(votes).filter(v=>v==='yes').length;
+  const no = Object.values(votes).filter(v=>v==='no').length;
+  const total = dels.length;
+  const passed = yes > no;
+
+  $('verdict-box-el').innerHTML = `
+    <div class="verdict-box ${passed ? 'vpass' : 'vfail'}">
+      <span class="verdict-ico">${passed ? '✅' : '❌'}</span>
+      <div class="verdict-t">${passed ? 'MOTION PASSES' : 'MOTION FAILS'}</div>
+      <div class="verdict-s">${yes} AGREE · ${no} DISAGREE · from ${total} delegates</div>
+    </div>
+  `;
+
+  ctx.voteResult = {yes, no, total, passed};
+  $('verdict-btn').onclick = () => issueResolution(ctx);
+}
+
+async function issueResolution(ctx) {
+  $('policy-section').style.display = 'block';
+  $('pol-body').textContent = 'Drafting resolution...';
+  $('verdict-btn').disabled = true;
+
+  const {topic, parl, lang, voteResult} = ctx;
+  const res = await ai(
+    `Draft a formal parliamentary resolution:\n\nTopic: "${topic}"\nVote: ${voteResult.yes} to ${voteResult.no} (${voteResult.passed ? 'PASSED' : 'FAILED'})\nDebate context:\n${debateLog.slice(-1000)}\n\nFormat:\nTITLE\nWHEREAS [context]...\nBE IT RESOLVED [action/finding]\nRATIONALE [reasoning]\nIMPLEMENTATION [next steps]`,
+    'You are a parliamentary legal draftsman. Create formal, clear, actionable resolutions.',
+    {lang, maxTok: 1800}
+  );
+  $('pol-body').textContent = res;
+  $('verdict-btn').disabled = false;
+
+  ST.votes++;
+  ST.records.push({topic, parl: parl.id, vote: voteResult, time: new Date().toISOString()});
+  saveState();
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// NAVIGATION & UI
+// ────────────────────────────────────────────────────────────────────────────────
+
+function goPage(id) {
+  qsa('.pg').forEach(p => p.classList.remove('on'));
+  qsa('.nb').forEach(b => b.classList.remove('on'));
+  $(` pg-${id}`)?.classList.add('on');
+  document.querySelector(`[data-pg="${id}"]`)?.classList.add('on');
+  $('scroll').scrollTop = 0;
+}
+
+function goToChamber(parlId) {
+  selParl = parlId;
+  goPage('chamber');
+  renderChamberParliaments();
+  renderFormats();
+}
+
+function updateStats() {
+  $('h-sessions')&&($('h-sessions').textContent = ST.sessions);
+  $('h-votes')&&($('h-votes').textContent = ST.votes);
+  $('session-count')&&($('session-count').textContent = ST.sessions + ' parliaments');
+}
+
+function saveProfile() {
+  ST.name = $('set-name')?.value.trim() || ST.name;
+  saveState();
+  toast('Profile saved ✅', 'gold');
+}
+
+function resetData() {
+  if(!confirm('RESET ALL DATA? Cannot undo.')) return;
+  ST = {name: ST.name, sessions: 0, votes: 0, xp: 0, records: []};
+  saveState();
+  updateStats();
+  toast('Data reset', 'gold');
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+// INITIALIZATION
+// ────────────────────────────────────────────────────────────────────────────────
+
+function init() {
+  setTimeout(() => $('splash').classList.add('gone'), 4000);
+
+  renderHomeParliaments();
+  renderQuickConvene();
+  renderChamberParliaments();
+  renderFormats();
+  renderDelegates();
+  renderTopicSuggestions();
+  
+  loadKeys();
+  if(ST.name && $('set-name')) $('set-name').value = ST.name;
+  updateStats();
+  updateDots();
+
+  qsa('.nb').forEach(b => b.addEventListener('click', () => goPage(b.dataset.pg)));
+  $('convene-btn')?.addEventListener('click', conveneParliament);
+  $('stop-btn')?.addEventListener('click', () => { stopFlag=true; toast('Halting parliament', 'err'); });
+  $('export-btn')?.addEventListener('click', () => {
+    navigator.clipboard.writeText(debateLog);
+    toast('Record exported ✅', 'gold');
+  });
+  $('new-session-btn')?.addEventListener('click', () => {
+    $('parliament-arena').style.display = 'none';
+    $('chamber-topic').value = '';
+    ar($('chamber-topic'));
+    $('scroll').scrollTop = 0;
+  });
+  
+  $('fu-send')?.addEventListener('click', async () => {
+    const inp = $('fu-input'), txt = inp.value.trim();
+    if(!txt) return;
+    inp.value = '';
+    ar(inp);
+    
+    const msgs = $('fu-msgs');
+    const ud = document.createElement('div');
+    ud.className = 'cm user';
+    ud.textContent = txt;
+    msgs.appendChild(ud);
+    
+    const td = document.createElement('div');
+    td.className = 'cm thinking';
+    td.textContent = 'Parliament considering...';
+    msgs.appendChild(td);
+    msgs.scrollTop = msgs.scrollHeight;
+    
+    const chief = DELEGATES.find(d=>d.id==='chief') || DELEGATES[0];
+    const resp = await ai(
+      `${debateLog.slice(-2000)}\n\nFollow-up: ${txt}`,
+      chief.sys,
+      {prov: pickProv(chief.prefer), lang: $('sel-lang').value}
+    );
+    
+    td.remove();
+    const ad = document.createElement('div');
+    ad.className = 'cm ai';
+    ad.textContent = resp;
+    msgs.appendChild(ad);
+    msgs.scrollTop = msgs.scrollHeight;
+  });
+
+  $('fu-input')?.addEventListener('keydown', e => {
+    if(e.key==='Enter' && !e.shiftKey) {
+      e.preventDefault();
+      $('fu-send').click();
+    }
+  });
+
+  $('fu-input')?.addEventListener('input', () => ar($('fu-input')));
+  $('chamber-topic')?.addEventListener('input', () => ar($('chamber-topic')));
+}
+
+init();
+</script>
+</body>
+</html>
+```
+
+---
+
+## 🚀 **Backend Proxy (Node.js)**
+
+```javascript name=backend-api.js
+// ╔════════════════════════════════════════════════════════════════════╗
+// ║         World Parliament AI Backend Proxy (Node.js)               ║
+// ╚════════════════════════════════════════════════════════════════════╝
+
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+require('dotenv').config();
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+// ────────────────────────────────────────────────────────────────────
+// API ENDPOINT: Multi-Provider LLM Gateway
+// ────────────────────────────────────────────────────────────────────
+
+app.post('/api/ai', async (req, res) => {
+  try {
+    const { provider, messages, maxTokens, model } = req.body;
+
+    console.log(`[${provider}] Request:`, messages.length, 'messages');
+
+    if (provider === 'openai') {
+      const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+        model: model || 'gpt-4o-mini',
+        messages,
+        max_tokens: maxTokens || 2000,
+        temperature: 0.7
+      }, {
+        headers: {
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      return res.json({
+        content: response.data.choices[0].message.content,
+        provider: 'openai'
+      });
+    }
+
+    if (provider === 'gemini') {
+      const response = await axios.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model || 'gemini-2.0-flash'}:generateContent?key=${process.env.GEMINI_API_KEY}`,
+        {
+          contents: [{
+            parts: [{
+              text: messages[messages.length - 1].content
+            }]
+          }]
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+
+      return res.json({
+        content: response.data.candidates[0].content.parts[0].text,
+        provider: 'gemini'
+      });
+    }
+
+    if (provider === 'groq') {
+      const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+        model: model || 'mixtral-8x7b-32768',
+        messages,
+        max_tokens: maxTokens || 2000
+      }, {
+        headers: {
+          'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      return res.json({
+        content: response.data.choices[0].message.content,
+        provider: 'groq'
+      });
+    }
+
+    res.status(400).json({ error: 'Provider not configured' });
+
+  } catch (err) {
+    console.error('[ERROR]', err.response?.data || err.message);
+    res.status(500).json({
+      error: err.response?.data?.error?.message || err.message
+    });
+  }
+});
+
+// ────────────────────────────────────────────────────────────────────
+// HEALTH CHECK
+// ────────────────────────────────────────────────────────────────────
+
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'running',
+    providers: {
+      openai: !!process.env.OPENAI_API_KEY,
+      gemini: !!process.env.GEMINI_API_KEY,
+      groq: !!process.env.GROQ_API_KEY
+    }
+  });
+});
+
+// ────────────────────────────────────────────────────────────────────
+// START SERVER
+// ────────────────────────────────────────────────────────────────────
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🏛️  World Parliament AI Backend running on http://localhost:${PORT}`);
+  console.log(`📍 Endpoint: POST http://localhost:${PORT}/api/ai`);
+});
+```
+
+---
+
+## 📝 **.env Configuration**
+
+```bash name=.env
+# API Keys
+OPENAI_API_KEY=sk-proj-...
+GEMINI_API_KEY=AIza...
+GROQ_API_KEY=gsk_...
+
+# Server
+PORT=3000
+NODE_ENV=production
+```
+
+---
+
+## ✨ **Features Included:**
+
+✅ **9 Super-Intelligent Delegates** - Each with distinct personality, expertise, and perspective
+✅ **6 Parliament Types** - Global, Justice, Legislative, Ethics, Science, Crisis
+✅ **5 Debate Formats** - Debate, Tribunal, Round-Table, Socratic, Cross-Exam
+✅ **Democratic Voting System** - Real verdicts from parliament
+✅ **Multi-Turn Conversations** - Debate history remembered
+✅ **Backend Proxy** - Secure API key handling
+✅ **Session Persistence** - Records all parliament sessions
+✅ **Professional UI** - Premium dark theme with parliament aesthetic
+
+**🎯 Run it:**
+```bash
+node backend-api.js
+# Then open HTML file in browser
+```
