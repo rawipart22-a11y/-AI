@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#06050e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="World Parliament AI">
+<title>⚖ WORLD PARLIAMENT · AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#06050e;--p1:#0b0a18;--p2:#0f0e1e;--p3:#131224;
+  --b1:#1a1930;--b2:#222040;--b3:#2a2850;
+  --gold:#c8a84a;--gold2:#e8c870;--gold3:#8a6e28;--golddim:#3a2e10;
+  --ruby:#b03030;--sapphire:#2060a0;--emerald:#207050;
+  --violet:#5830a0;--amber:#c07010;--teal:#208080;
+  --tx:#eae8f8;--mu:#585580;--mu2:#32305a;
+  --red:#d84040;--green:#38c878;--blue:#3888d8;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--tx)}
+body{font-family:'Noto Sans Thai',sans-serif;display:flex;flex-direction:column;position:relative}
+body::before{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 20% 30%,rgba(200,168,74,.04) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 70%,rgba(88,48,160,.03) 0%,transparent 55%);
+  pointer-events:none;z-index:0}
+
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;transition:opacity 1.4s ease}
+#splash.gone{opacity:0;pointer-events:none}
+.sp-emblem{font-size:3.2rem;animation:epulse 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(200,168,74,.4))}
+@keyframes epulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.05);opacity:1}}
+.sp-rule{width:180px;height:1px;background:linear-gradient(90deg,transparent,var(--gold3),var(--gold),var(--gold3),transparent)}
+.sp-title{font-family:'Cinzel',serif;font-size:1.85rem;font-weight:900;letter-spacing:.24em;color:var(--gold);text-shadow:0 0 36px rgba(200,168,74,.3);text-align:center}
+.sp-sub{font-family:'Cinzel',serif;font-size:.52rem;font-weight:400;letter-spacing:.45em;color:var(--gold3);text-align:center}
+.sp-tag{font-family:'IBM Plex Mono';font-size:.42rem;letter-spacing:.2em;color:var(--mu);text-align:center;line-height:2.5}
+.sp-bar{width:200px;height:1px;background:var(--b2);overflow:hidden}
+.sp-fill{height:100%;background:linear-gradient(90deg,var(--gold3),var(--gold2));animation:spf 3.8s cubic-bezier(.25,.46,.45,.94) forwards}
+@keyframes spf{from{width:0}to{width:100%}}
+
+/* HEADER */
+#hdr{flex-shrink:0;position:relative;z-index:100;display:flex;align-items:center;gap:.55rem;padding:.52rem .88rem;background:rgba(6,5,14,.97);border-bottom:1px solid rgba(200,168,74,.14);backdrop-filter:blur(20px)}
+.hdr-logo{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;letter-spacing:.14em;color:var(--gold);text-shadow:0 0 14px rgba(200,168,74,.22);flex-shrink:0;cursor:pointer}
+.hdr-sep{width:1px;height:14px;background:var(--b2);flex-shrink:0}
+.hdr-status{font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kd-row{display:flex;gap:4px;cursor:pointer;flex-shrink:0}
+.kd{width:7px;height:7px;border-radius:50%;background:var(--b2);transition:all .35s}
+.kd.on{background:var(--green);box-shadow:0 0 7px rgba(56,200,120,.8)}
+.kd.half{background:var(--gold);box-shadow:0 0 7px rgba(200,168,74,.7)}
+
+/* SCROLL */
+#scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:5.2rem;position:relative;z-index:1}
+#scroll::-webkit-scrollbar{width:3px}
+#scroll::-webkit-scrollbar-thumb{background:rgba(200,168,74,.16);border-radius:2px}
+
+/* BOTTOM NAV */
+#bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(6,5,14,.98);border-top:1px solid rgba(200,168,74,.11);display:flex;overflow-x:auto;padding-bottom:env(safe-area-inset-bottom,0);backdrop-filter:blur(20px)}
+#bnav::-webkit-scrollbar{display:none}
+.nb{flex:1;min-width:52px;display:flex;flex-direction:column;align-items:center;padding:.38rem .04rem .3rem;gap:.05rem;background:transparent;border:none;color:var(--mu);font-family:'Noto Sans Thai';font-size:.35rem;cursor:pointer;transition:color .2s;white-space:nowrap}
+.nb .ni{font-size:.95rem;transition:all .25s;display:block}
+.nb.on{color:var(--gold)}
+.nb.on .ni{transform:scale(1.12);filter:drop-shadow(0 0 5px rgba(200,168,74,.7))}
+
+/* PAGES */
+.pg{display:none;animation:pgin .3s ease}
+.pg.on{display:block}
+@keyframes pgin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* UTILS */
+.btn{font-family:'Noto Sans Thai';font-size:.72rem;font-weight:600;padding:.4em .95em;border-radius:4px;border:none;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.3em;white-space:nowrap;letter-spacing:.03em}
+.btn:active{transform:scale(.95)}
+.btn:disabled{opacity:.28;pointer-events:none}
+.bgold{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#06050e;font-weight:700}
+.bgold:hover{filter:brightness(1.1)}
+.bsilver{background:rgba(255,255,255,.055);border:1px solid var(--b2);color:var(--mu)}
+.bsilver:hover{border-color:var(--gold3);color:var(--gold3)}
+.bruby{background:var(--ruby);color:#fff}
+.brow{display:flex;gap:.3rem;flex-wrap:wrap}
+.fi{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:4px;padding:.42rem .65rem;color:var(--tx);font-family:'Noto Sans Thai';font-size:.8rem;outline:none;transition:all .2s}
+.fi:focus{border-color:rgba(200,168,74,.35);background:rgba(200,168,74,.02)}
+.fi::placeholder{color:var(--mu)}
+textarea.fi{resize:none}
+.fsel{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:4px;padding:.42rem .65rem;color:var(--tx);font-family:'IBM Plex Mono';font-size:.58rem;outline:none;-webkit-appearance:none;cursor:pointer}
+.fsel option{background:var(--p1)}
+.hscroll{display:flex;gap:.28rem;overflow-x:auto;padding-bottom:.22rem;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.pill{font-family:'IBM Plex Mono';font-size:.46rem;white-space:nowrap;padding:.26em .66em;border-radius:2px;border:1px solid var(--b2);background:transparent;color:var(--mu);cursor:pointer;transition:all .16s;flex-shrink:0;letter-spacing:.04em}
+.pill.on{background:var(--gold);color:#06050e;border-color:var(--gold);font-weight:700}
+.pill:active{transform:scale(.94)}
+.stitle{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--gold3);margin:.72rem 0 .36rem;padding-left:.05rem}
+.chip{font-family:'IBM Plex Mono';font-size:.44rem;padding:.1em .48em;border-radius:2px;display:inline-block;letter-spacing:.06em}
+.cg{background:rgba(56,200,120,.08);color:var(--green);border:1px solid rgba(56,200,120,.15)}
+.cy{background:rgba(200,168,74,.08);color:var(--gold);border:1px solid rgba(200,168,74,.15)}
+.cr{background:rgba(216,64,64,.08);color:var(--red);border:1px solid rgba(216,64,64,.15)}
+.stag{font-family:'IBM Plex Mono';font-size:.46rem;padding:.1em .42em;border-radius:2px}
+.sok{color:var(--green);background:rgba(56,200,120,.07);border:1px solid rgba(56,200,120,.14)}
+.serr{color:var(--red);background:rgba(216,64,64,.07);border:1px solid rgba(216,64,64,.14)}
+.sload{color:var(--gold);background:rgba(200,168,74,.07);border:1px solid rgba(200,168,74,.14)}
+.card{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden}
+.card-hd{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.25em;color:var(--gold3);padding:.42rem .72rem;border-bottom:1px solid var(--b1);background:rgba(200,168,74,.02)}
+
+/* HERO */
+.hero{padding:.95rem .86rem .68rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,74,.09)}
+.hero::before{content:'';position:absolute;top:-25px;right:-15px;width:140px;height:140px;border:1px solid rgba(200,168,74,.05);border-radius:50%;pointer-events:none}
+.hero-eye{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.38em;color:var(--gold3);background:rgba(200,168,74,.05);border:1px solid rgba(200,168,74,.11);padding:.16em .68em;border-radius:2px;display:inline-block;margin-bottom:.5rem}
+.hero-title{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;line-height:.9;margin-bottom:.25rem;letter-spacing:.02em}
+.hero-title .g{color:var(--gold);text-shadow:0 0 18px rgba(200,168,74,.22)}
+.hero-sub{font-family:'Crimson Pro',serif;font-size:.82rem;color:var(--mu);line-height:1.9;font-style:italic}
+.hero-stats{display:flex;gap:.32rem;margin-top:.65rem}
+.hstat{flex:1;background:rgba(255,255,255,.02);border:1px solid rgba(200,168,74,.09);border-radius:5px;padding:.4rem;text-align:center}
+.hstat-n{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold);line-height:1}
+.hstat-l{font-family:'IBM Plex Mono';font-size:.34rem;color:var(--mu);margin-top:.05rem;letter-spacing:.12em}
+
+/* MODE GRID */
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:.32rem}
+.mode-card{background:var(--p1);border:1px solid var(--b1);border-radius:8px;padding:.68rem .62rem;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
+.mode-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--mc,transparent);opacity:0;transition:opacity .22s}
+.mode-card.on{border-color:var(--mcb,var(--gold));box-shadow:0 0 14px rgba(200,168,74,.06)}
+.mode-card.on::after{opacity:1}
+.mode-card:active{transform:scale(.96)}
+.mc-ico{font-size:1.6rem;display:block;margin-bottom:.32rem}
+.mc-name{font-family:'Cinzel',serif;font-size:.74rem;font-weight:700;letter-spacing:.05em;color:var(--tx);margin-bottom:.12rem}
+.mc-desc{font-size:.54rem;color:var(--mu);line-height:1.6}
+.mode-card.on .mc-name{color:var(--mcc,var(--gold))}
+.mc-badge{position:absolute;top:.42rem;right:.42rem;font-family:'IBM Plex Mono';font-size:.33rem;padding:.07em .36em;border-radius:2px;color:var(--mcc,var(--gold));background:rgba(200,168,74,.06);border:1px solid rgba(200,168,74,.13);letter-spacing:.08em}
+
+/* DELEGATE */
+.del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem}
+.del-card{background:var(--p1);border:1px solid var(--b1);border-radius:7px;padding:.52rem .42rem;cursor:pointer;transition:all .2s;position:relative;text-align:center}
+.del-card.on{border-color:var(--dc,var(--gold));background:rgba(200,168,74,.025)}
+.del-card:active{transform:scale(.94)}
+.dc-ico{font-size:1.3rem;display:block;margin-bottom:.16rem}
+.dc-name{font-family:'Cinzel',serif;font-size:.58rem;font-weight:600;letter-spacing:.03em;line-height:1.15;margin-bottom:.07rem}
+.dc-role{font-size:.42rem;color:var(--mu);line-height:1.3}
+.dc-ck{position:absolute;top:.28rem;right:.28rem;width:13px;height:13px;border-radius:50%;background:var(--b2);display:flex;align-items:center;justify-content:center;font-size:.4rem;transition:all .2s}
+.del-card.on .dc-ck{background:var(--gold);color:#06050e}
+
+/* ARENA */
+.arena-wrap{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden;margin-bottom:.48rem}
+.arena-hdr{padding:.52rem .78rem;background:linear-gradient(90deg,rgba(200,168,74,.06),transparent);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.arena-title{font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;letter-spacing:.05em;color:var(--gold)}
+.arena-meta{font-family:'IBM Plex Mono';font-size:.38rem;color:var(--mu);text-align:right}
+.arena-msgs{max-height:55vh;overflow-y:auto;display:flex;flex-direction:column}
+.arena-msgs::-webkit-scrollbar{width:2px}
+.arena-msgs::-webkit-scrollbar-thumb{background:rgba(200,168,74,.14)}
+
+/* TURNS */
+.cturn{padding:.58rem .76rem;border-bottom:1px solid rgba(200,168,74,.045);animation:pgin .3s ease}
+.cturn:last-child{border-bottom:none}
+.cturn.vt{background:linear-gradient(135deg,rgba(200,168,74,.04),rgba(88,48,160,.02))}
+.cturn-head{display:flex;align-items:center;gap:.38rem;margin-bottom:.28rem;flex-wrap:wrap}
+.cturn-ico{font-size:1.05rem;flex-shrink:0}
+.cturn-name{font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.cturn-role{font-family:'IBM Plex Mono';font-size:.34rem;color:var(--mu);background:rgba(255,255,255,.025);border:1px solid var(--b1);padding:.07em .34em;border-radius:2px}
+.cturn-lbl{font-family:'IBM Plex Mono';font-size:.33rem;color:var(--mu2);margin-left:auto}
+.cturn-body{font-size:.74rem;line-height:2;white-space:pre-wrap;word-break:break-word;color:var(--tx)}
+.cturn-body.loading{color:var(--mu);font-style:italic;animation:blink 1.3s infinite}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:.9}}
+.cturn-acts{display:flex;gap:.24rem;margin-top:.36rem}
+.cact{font-family:'IBM Plex Mono';font-size:.38rem;padding:.11em .42em;border-radius:2px;border:1px solid var(--b2);background:transparent;color:var(--mu);cursor:pointer;transition:all .15s}
+.cact:hover{border-color:var(--gold3);color:var(--gold3)}
+.rsep{display:flex;align-items:center;gap:.38rem;padding:.32rem .76rem;background:rgba(200,168,74,.03);border-bottom:1px solid rgba(200,168,74,.045)}
+.rsep-l{flex:1;height:1px;background:linear-gradient(90deg,rgba(200,168,74,.28),transparent)}
+.rsep-r{flex:1;height:1px;background:linear-gradient(270deg,rgba(200,168,74,.28),transparent)}
+.rsep-txt{font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;color:var(--gold3);white-space:nowrap;letter-spacing:.1em}
+
+/* FOLLOW-UP */
+.fu-wrap{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden;margin-bottom:.48rem}
+.fu-msgs{max-height:26vh;overflow-y:auto;display:flex;flex-direction:column;gap:.3rem;padding:.55rem}
+.fu-msgs::-webkit-scrollbar{display:none}
+.cm{max-width:91%;font-size:.74rem;line-height:1.95;padding:.46rem .62rem;border-radius:6px;animation:pgin .2s ease;word-break:break-word;white-space:pre-wrap}
+.cm.user{align-self:flex-end;background:rgba(200,168,74,.07);border:1px solid rgba(200,168,74,.12)}
+.cm.ai{align-self:flex-start;background:rgba(88,48,160,.06);border:1px solid rgba(88,48,160,.12)}
+.cm.sys{align-self:center;font-family:'IBM Plex Mono';font-size:.42rem;color:var(--mu);background:rgba(255,255,255,.012);border:1px solid var(--b1);padding:.13em .46em;border-radius:2px;white-space:normal}
+.cm.thinking{color:var(--mu);font-style:italic;animation:blink 1.4s infinite;align-self:flex-start}
+.fu-inp{display:flex;gap:.27rem;padding:.4rem;border-top:1px solid var(--b1);align-items:flex-end}
+.fu-ta{flex:1;background:rgba(255,255,255,.025);border:1px solid var(--b1);border-radius:4px;padding:.36rem .56rem;color:var(--tx);font-family:'Noto Sans Thai';font-size:.78rem;outline:none;resize:none;max-height:72px;min-height:28px}
+.fu-ta:focus{border-color:rgba(200,168,74,.28)}
+.fu-ta::placeholder{color:var(--mu)}
+.send-btn{width:29px;height:29px;border-radius:4px;border:none;display:flex;align-items:center;justify-content:center;font-size:.76rem;cursor:pointer;background:var(--gold);color:#06050e;flex-shrink:0;transition:all .15s}
+.send-btn:active{transform:scale(.87)}
+.send-btn:disabled{opacity:.28;pointer-events:none}
+
+/* VOTE */
+.vote-row{display:flex;align-items:center;justify-content:space-between;padding:.48rem .68rem;border-radius:6px;margin-bottom:.3rem;background:rgba(255,255,255,.02);border:1px solid var(--b1)}
+.vote-nm{display:flex;align-items:center;gap:.34rem;font-size:.74rem}
+.vbadge{font-family:'IBM Plex Mono';font-size:.42rem;padding:.08em .46em;border-radius:2px;font-weight:700;letter-spacing:.06em}
+.vay{background:rgba(56,200,120,.09);color:var(--green);border:1px solid rgba(56,200,120,.17)}
+.vno{background:rgba(216,64,64,.08);color:var(--red);border:1px solid rgba(216,64,64,.15)}
+.vab{background:rgba(200,168,74,.07);color:var(--gold);border:1px solid rgba(200,168,74,.14)}
+.verdict-box{border:1px solid rgba(200,168,74,.18);border-radius:8px;padding:.85rem;text-align:center;margin-top:.6rem}
+.verdict-ico{font-size:2rem;display:block;margin-bottom:.3rem}
+.verdict-t{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:900;letter-spacing:.06em}
+.verdict-s{font-family:'Crimson Pro',serif;font-size:.8rem;color:var(--mu);margin-top:.22rem;font-style:italic}
+.vpass{background:rgba(56,200,120,.04);border-color:rgba(56,200,120,.22)}
+.vpass .verdict-t{color:var(--green)}
+.vfail{background:rgba(216,64,64,.04);border-color:rgba(216,64,64,.18)}
+.vfail .verdict-t{color:var(--red)}
+
+/* POLICY */
+.pol-seal{display:flex;align-items:center;gap:.48rem;margin:.6rem 0 .36rem}
+.pol-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold3));opacity:.5}
+.pol-line.r{background:linear-gradient(270deg,transparent,var(--gold3))}
+.pol-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.25em;color:var(--gold3)}
+.pol-body{background:rgba(200,168,74,.03);border:1px solid rgba(200,168,74,.13);border-radius:8px;padding:.78rem;font-size:.75rem;line-height:2;font-family:'Crimson Pro',serif;white-space:pre-wrap}
+
+/* SETTINGS */
+.set-card{background:var(--p1);border:1px solid var(--b1);border-radius:8px;overflow:hidden;margin-bottom:.58rem}
+.set-hd{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.28em;color:var(--gold3);padding:.42rem .72rem;border-bottom:1px solid var(--b1);background:rgba(200,168,74,.02)}
+.set-row{display:flex;align-items:flex-start;gap:.5rem;padding:.62rem .72rem;border-bottom:1px solid var(--b1)}
+.set-row:last-child{border-bottom:none}
+.set-ico{font-size:.85rem;width:17px;text-align:center;flex-shrink:0;margin-top:.04rem}
+.set-body{flex:1}
+.set-body h4{font-size:.72rem;font-weight:600;margin-bottom:.04rem}
+.set-body p{font-size:.56rem;color:var(--mu);line-height:1.55}
+.aprov-sec{padding:.48rem .72rem;border-bottom:1px solid var(--b1)}
+.aprov-sec:last-child{border-bottom:none}
+.aprov-hd{display:flex;align-items:center;gap:.4rem;margin-bottom:.22rem}
+.aprov-ico{font-size:.9rem;flex-shrink:0}
+.aprov-nm{font-size:.7rem;font-weight:600;flex:1}
+.aprov-badge{font-family:'IBM Plex Mono';font-size:.34rem;padding:.07em .36em;border-radius:2px;letter-spacing:.06em}
+.aprov-model{font-family:'IBM Plex Mono';font-size:.38rem;color:var(--mu);margin-bottom:.26rem}
+.aprov-inp{display:flex;gap:.24rem;align-items:center}
+.aprov-inp .fi{font-family:'IBM Plex Mono';font-size:.54rem;padding:.3rem .48rem}
+.aprov-status{font-family:'IBM Plex Mono';font-size:.43rem;margin-top:.17rem;display:none}
+.aprov-guide{font-size:.54rem;color:var(--mu);line-height:1.7;margin-top:.26rem;padding:.26rem .42rem;background:rgba(255,255,255,.012);border-radius:4px;border-left:2px solid var(--gold3)}
+
+/* HOME */
+.home-band{padding:.85rem .86rem .62rem;border-bottom:1px solid rgba(200,168,74,.07)}
+.home-greet{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;color:var(--tx);line-height:1;margin-bottom:.22rem}
+.home-greet .g{color:var(--gold)}
+.home-tag{font-family:'Crimson Pro',serif;font-style:italic;font-size:.78rem;color:var(--mu);line-height:1.8}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.28rem;margin:.52rem 0}
+.sbox{background:rgba(255,255,255,.02);border:1px solid rgba(200,168,74,.08);border-radius:5px;padding:.42rem;text-align:center}
+.sn{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold);line-height:1}
+.sl{font-family:'IBM Plex Mono';font-size:.33rem;color:var(--mu);margin-top:.04rem;letter-spacing:.1em}
+.api-bar{display:flex;align-items:center;gap:.42rem;padding:.5rem .62rem;border:1px solid rgba(200,168,74,.11);border-radius:5px;background:rgba(200,168,74,.02);cursor:pointer;transition:border-color .2s}
+.api-bar:hover{border-color:rgba(200,168,74,.22)}
+.api-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.api-txt{font-size:.6rem;flex:1;line-height:1.4}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:.28rem;margin-bottom:.52rem}
+.qcard{background:var(--p1);border:1px solid var(--b1);border-radius:6px;padding:.52rem .48rem;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:.36rem}
+.qcard:active{transform:scale(.96);border-color:var(--gold3)}
+.qcard-ico{font-size:1.1rem;flex-shrink:0}
+.qcard-txt{font-size:.58rem;color:var(--tx);line-height:1.55;flex:1}
+.qcard-mode{font-family:'IBM Plex Mono';font-size:.34rem;color:var(--mu);margin-top:.1rem;letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="sp-emblem">⚖️</div>
+  <div class="sp-rule"></div>
+  <div class="sp-title">WORLD PARLIAMENT</div>
+  <div class="sp-sub">ARTIFICIAL INTELLIGENCE</div>
+  <div class="sp-tag">สภาโต้เถียง · สภาตัดสินคดี · สภาการเมือง<br>DEBATE · COURT · VOTE · POLICY · ALL TOPICS</div>
+  <div class="sp-rule"></div>
+  <div class="sp-bar"><div class="sp-fill"></div></div>
+</div>
+
+<div id="hdr">
+  <div class="hdr-logo" onclick="goPage('home')">⚖ WP·AI</div>
+  <div class="hdr-sep"></div>
+  <div class="hdr-status" id="hdr-status">World Parliament · AI Council</div>
+  <div class="kd-row" onclick="goPage('settings')" title="API Keys">
+    <div class="kd" id="kd-b" title="Claude Built-in"></div>
+    <div class="kd" id="kd-o" title="OpenAI"></div>
+    <div class="kd" id="kd-g" title="Gemini"></div>
+    <div class="kd" id="kd-q" title="Groq"></div>
+  </div>
+</div>
+
+<div id="scroll">
+
+<!-- CHAMBER PAGE -->
+<div class="pg on" id="pg-chamber">
+  <div class="hero">
+    <div class="hero-eye">WORLD PARLIAMENT · AI COUNCIL</div>
+    <div class="hero-title"><span class="g">สภา</span>โลก<br>แห่ง AI</div>
+    <div class="hero-sub">รวมทุกสภา — โต้เถียง ตัดสินคดี ออกนโยบาย เลือกตั้ง ทุกเรื่องในโลก</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n" id="hs-sess">0</div><div class="hstat-l">SESSIONS</div></div>
+      <div class="hstat"><div class="hstat-n" id="hs-del">4</div><div class="hstat-l">DELEGATES</div></div>
+      <div class="hstat"><div class="hstat-n" id="hs-xp">0</div><div class="hstat-l">XP</div></div>
+    </div>
+  </div>
+
+  <div style="padding:.6rem .8rem 0">
+    <div class="stitle">I · ประเภทสภา</div>
+    <div class="mode-grid" id="mode-grid"></div>
+
+    <div class="stitle">II · รูปแบบการประชุม</div>
+    <div class="hscroll" id="style-pills"></div>
+
+    <div class="stitle">III · ผู้แทน AI <span style="font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);font-weight:400">(เลือกได้หลายคน)</span></div>
+    <div class="del-grid" id="del-grid"></div>
+
+    <div class="stitle">IV · ประเด็นพิจารณา</div>
+    <div class="card" style="margin-bottom:.42rem">
+      <div class="card-hd">หัวข้อ / คดี / ประเด็น</div>
+      <div style="padding:.52rem">
+        <textarea class="fi" id="council-topic" rows="2" placeholder="พิมพ์ประเด็นใดก็ได้ในโลก... เช่น ควรห้ามรถน้ำมันปี 2030? / คดีฆาตกรรม X / ร่าง พ.ร.บ. AI / การสมรสเท่าเทียม / สงครามนิวเคลียร์"></textarea>
+        <div class="hscroll" id="topic-pills" style="margin-top:.35rem"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.32rem;margin-bottom:.45rem">
+      <div>
+        <div style="font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);margin-bottom:.2rem;letter-spacing:.1em">รอบการประชุม</div>
+        <select class="fsel" id="sel-rounds">
+          <option value="2">2 รอบ (เร็ว)</option>
+          <option value="3" selected>3 รอบ (มาตรฐาน)</option>
+          <option value="4">4 รอบ (ลึก)</option>
+          <option value="5">5 รอบ (เข้มข้น)</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono';font-size:.4rem;color:var(--mu);margin-bottom:.2rem;letter-spacing:.1em">ภาษา</div>
+        <select class="fsel" id="sel-lang">
+          <option value="th">🇹🇭 ภาษาไทย</option>
+          <option value="en">🇺🇸 English</option>
+          <option value="mix">🌐 ผสม</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="brow" style="margin-bottom:.48rem">
+      <button class="btn bgold" id="council-go" style="flex:1;justify-content:center;font-size:.78rem;padding:.48em">⚖ เปิดประชุมสภา</button>
+      <button class="btn bsilver" id="council-stop" style="display:none">⏹ หยุด</button>
+    </div>
+
+    <!-- ARENA -->
+    <div id="council-arena" style="display:none">
+      <div class="arena-wrap">
+        <div class="arena-hdr">
+          <div class="arena-title" id="arena-title">🏛 สภา AI</div>
+          <div class="arena-meta" id="arena-meta"></div>
+        </div>
+        <div class="arena-msgs" id="arena-msgs"></div>
+      </div>
+
+      <div id="vote-section" style="display:none">
+        <div class="stitle">การลงมติ</div>
+        <div id="vote-rows"></div>
+        <div id="verdict-box-el"></div>
+        <button class="btn bgold" id="policy-btn" style="margin-top:.48rem;width:100%;justify-content:center">📜 ออกมติ / คำพิพากษา / นโยบาย</button>
+      </div>
+
+      <div id="policy-section" style="display:none">
+        <div class="pol-seal">
+          <div class="pol-line"></div>
+          <div class="pol-label">⚖ มติสภา AI โลก</div>
+          <div class="pol-line r"></div>
+        </div>
+        <div class="pol-body" id="pol-body"></div>
+      </div>
+
+      <div class="stitle">ถามต่อกับสภา</div>
+      <div class="fu-wrap">
+        <div class="fu-msgs" id="fu-msgs">
+          <div class="cm sys">ถามเพิ่มเติมได้เลย — AI จำบริบทการประชุมทั้งหมด</div>
+        </div>
+        <div class="fu-inp">
+          <textarea class="fu-ta" id="fu-input" placeholder="ถามต่อ..." rows="1"></textarea>
+          <button class="send-btn" id="fu-send">➤</button>
+        </div>
+      </div>
+
+      <div class="brow" style="margin-bottom:1rem">
+        <button class="btn bsilver" id="copy-btn" style="font-size:.62rem">📋 Copy ผลประชุม</button>
+        <button class="btn bsilver" id="new-btn" style="font-size:.62rem">🔄 ประชุมใหม่</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOME PAGE -->
+<div class="pg" id="pg-home">
+  <div class="home-band">
+    <div class="home-greet">สวัสดี<span class="g"> ⚖</span></div>
+    <div class="home-tag">World Parliament AI · สภาทุกประเภท ทุกเรื่องในโลก</div>
+    <div class="stat-row">
+      <div class="sbox"><div class="sn" id="h-sess">0</div><div class="sl">SESSIONS</div></div>
+      <div class="sbox"><div class="sn" id="h-xp">0</div><div class="sl">XP</div></div>
+      <div class="sbox"><div class="sn" id="h-ai">1</div><div class="sl">AI ACTIVE</div></div>
+    </div>
+    <div class="api-bar" id="api-bar" onclick="goPage('settings')">
+      <div class="api-dot" id="api-dot"></div>
+      <div class="api-txt" id="api-txt">ตรวจสอบ API...</div>
+      <div style="font-size:.7rem;color:var(--mu)">›</div>
+    </div>
+  </div>
+  <div style="padding:.62rem .8rem 0">
+    <div class="stitle">ประชุมด่วน</div>
+    <div class="quick-grid" id="quick-grid"></div>
+    <div class="stitle">เกี่ยวกับ</div>
+    <div class="card" style="margin-bottom:.65rem">
+      <div style="padding:.68rem .75rem;font-family:'Crimson Pro',serif;font-size:.8rem;color:var(--mu);line-height:2;font-style:italic">
+        World Parliament AI รวมทุกรูปแบบสภา — โต้เถียงการเมือง ตัดสินคดีความ
+        ออกนโยบาย ถกจริยธรรม วิทยาศาสตร์ วิกฤตโลก<br><br>
+        AI หลายตัวจากหลายบริษัทแสดงจุดยืนที่ต่างกัน โต้เถียง ลงมติ
+        และออกคำตัดสินในประเด็นที่คุณกำหนด — ทุกเรื่องในโลก
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS PAGE -->
+<div class="pg" id="pg-settings">
+  <div style="padding:.8rem .86rem 0">
+    <div style="font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:.15rem;letter-spacing:.06em">⚙ ตั้งค่า</div>
+    <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:.76rem;color:var(--mu);margin-bottom:.65rem">API Keys · การตั้งค่าสภา · โปรไฟล์</div>
+
+    <div class="set-card">
+      <div class="set-hd">🔑 API KEYS — กุญแจสู่ AI หลากหลาย</div>
+      <div style="margin:.4rem .72rem;padding:.5rem .62rem;background:rgba(200,168,74,.04);border:1px solid rgba(200,168,74,.11);border-radius:5px;font-size:.6rem;color:var(--mu);line-height:1.85">
+        ⭐ <strong style="color:var(--gold)">Claude Built-in</strong> — ฟรีใน claude.ai ไม่ต้องใส่ Key เลย<br>
+        🔑 ใส่ Key เพิ่มเพื่อ AI หลากหลาย → ผลการถกเถียงดีขึ้น<br>
+        🔒 Key เก็บในเครื่องคุณเท่านั้น ไม่ส่งออก
+      </div>
+
+      <!-- BUILT-IN -->
+      <div class="aprov-sec" style="border-color:rgba(56,200,120,.1)">
+        <div class="aprov-hd">
+          <div class="aprov-ico">⭐</div>
+          <div class="aprov-nm" style="color:var(--green)">Claude (Built-in)</div>
+          <div class="aprov-badge" style="background:rgba(56,200,120,.09);color:var(--green);border:1px solid rgba(56,200,120,.17)">✅ ฟรี</div>
+        </div>
+        <div class="aprov-model">claude-sonnet-4-6 · ใช้งานได้ทันที · ไม่ต้อง Key</div>
+      </div>
+
+      <!-- OPENAI -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">🤖</div><div class="aprov-nm">OpenAI / ChatGPT</div><div class="aprov-badge cy">gpt-4o-mini</div></div>
+        <div class="aprov-model">platform.openai.com → API keys</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-openai" placeholder="sk-proj-..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.54rem;padding:.27em .56em;flex-shrink:0" onclick="testKey('openai')">Test</button>
+        </div>
+        <div id="st-openai" class="aprov-status stag"></div>
+        <div class="aprov-guide">platform.openai.com → เข้าสู่ระบบ → API keys → "Create new secret key"</div>
+      </div>
+
+      <!-- GEMINI -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">💎</div><div class="aprov-nm">Google Gemini</div><div class="aprov-badge cg">gemini-2.0-flash · ฟรี</div></div>
+        <div class="aprov-model">aistudio.google.com → Get API key</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-gemini" placeholder="AIza..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.54rem;padding:.27em .56em;flex-shrink:0" onclick="testKey('gemini')">Test</button>
+        </div>
+        <div id="st-gemini" class="aprov-status stag"></div>
+        <div class="aprov-guide">aistudio.google.com → "Get API key" → "Create API key" → เลือก project → คัดลอก</div>
+      </div>
+
+      <!-- GROQ -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">⚡</div><div class="aprov-nm">Groq</div><div class="aprov-badge cg">llama3-70b · ฟรี · เร็ว</div></div>
+        <div class="aprov-model">console.groq.com → API Keys</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-groq" placeholder="gsk_..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.54rem;padding:.27em .56em;flex-shrink:0" onclick="testKey('groq')">Test</button>
+        </div>
+        <div id="st-groq" class="aprov-status stag"></div>
+        <div class="aprov-guide">console.groq.com → เข้าสู่ระบบ Google → "API Keys" → "Create API Key"</div>
+      </div>
+
+      <!-- CLAUDE KEY -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">🧠</div><div class="aprov-nm">Anthropic Claude (Key)</div><div class="aprov-badge" style="background:rgba(88,48,160,.1);color:#9878e8;border:1px solid rgba(88,48,160,.18)">claude-opus</div></div>
+        <div class="aprov-model">console.anthropic.com → API Keys</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-claude" placeholder="sk-ant-api03-..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.54rem;padding:.27em .56em;flex-shrink:0" onclick="testKey('claude')">Test</button>
+        </div>
+        <div id="st-claude" class="aprov-status stag"></div>
+        <div class="aprov-guide">console.anthropic.com → เข้าสู่ระบบ → "API Keys" → "Create Key"</div>
+      </div>
+
+      <!-- MISTRAL -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">🌊</div><div class="aprov-nm">Mistral AI</div><div class="aprov-badge" style="background:rgba(56,136,216,.08);color:var(--blue);border:1px solid rgba(56,136,216,.15)">mistral-large</div></div>
+        <div class="aprov-model">console.mistral.ai → API Keys</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-mistral" placeholder="..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.54rem;padding:.27em .56em;flex-shrink:0" onclick="testKey('mistral')">Test</button>
+        </div>
+        <div id="st-mistral" class="aprov-status stag"></div>
+      </div>
+
+      <!-- OPENROUTER -->
+      <div class="aprov-sec">
+        <div class="aprov-hd"><div class="aprov-ico">🔀</div><div class="aprov-nm">OpenRouter</div><div class="aprov-badge" style="background:rgba(88,48,160,.1);color:#9878e8;border:1px solid rgba(88,48,160,.18)">100+ โมเดล</div></div>
+        <div class="aprov-model">openrouter.ai → Keys — รวม GPT, Claude, Llama, Gemini</div>
+        <div class="aprov-inp">
+          <input class="fi" type="password" id="k-openrouter" placeholder="sk-or-v1-..." autocomplete="off">
+          <button class="btn bsilver" style="font-size:.54rem;padding:.27em .56em;flex-shrink:0" onclick="testKey('openrouter')">Test</button>
+        </div>
+        <div id="st-openrouter" class="aprov-status stag"></div>
+      </div>
+
+      <div style="padding:.48rem .72rem">
+        <button class="btn bgold" onclick="saveAllKeys()" style="width:100%;justify-content:center;font-size:.74rem">💾 บันทึก Keys ทั้งหมด</button>
+      </div>
+    </div>
+
+    <div class="set-card">
+      <div class="set-hd">👤 โปรไฟล์</div>
+      <div class="set-row">
+        <div class="set-ico">✏️</div>
+        <div class="set-body" style="flex:1">
+          <h4>ชื่อผู้ใช้</h4>
+          <input class="fi" id="set-name" placeholder="ชื่อของคุณ..." style="margin-top:.28rem;font-size:.72rem">
+        </div>
+      </div>
+      <div class="set-row">
+        <div class="set-ico">🗑️</div>
+        <div class="set-body" style="flex:1"><h4>รีเซ็ตข้อมูล</h4><p>ล้าง XP, sessions ทั้งหมด</p></div>
+        <button class="btn bruby" style="font-size:.6rem;flex-shrink:0" onclick="resetData()">รีเซ็ต</button>
+      </div>
+      <div style="padding:.44rem .72rem">
+        <button class="btn bgold" onclick="saveProfile()" style="width:100%;justify-content:center;font-size:.72rem">บันทึก</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-family:'IBM Plex Mono';font-size:.42rem;color:var(--mu2);padding:.75rem 0 .4rem;letter-spacing:.1em">
+      WORLD PARLIAMENT AI v1.0 · Keys เก็บในเครื่องคุณเท่านั้น
+    </div>
+  </div>
+</div>
+
+</div><!-- /scroll -->
+
+<div id="bnav">
+  <button class="nb" data-pg="home"><span class="ni">🏠</span>หน้าแรก</button>
+  <button class="nb on" data-pg="chamber"><span class="ni">⚖</span>สภา AI</button>
+  <button class="nb" data-pg="settings"><span class="ni">⚙</span>ตั้งค่า</button>
+</div>
+
+<script>
+// ── UTILS ──
+const $=id=>document.getElementById(id);
+const qsa=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const ar=el=>{el.style.height='auto';el.style.height=Math.min(el.scrollHeight,108)+'px'};
+const ls={
+  get:(k,d=null)=>{try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch{return d}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+};
+function toast(msg,type='ok'){
+  const c={ok:'#38c878',err:'#d84040',gold:'#c8a84a'};
+  const fc={ok:'#06050e',err:'#fff',gold:'#06050e'};
+  const t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText=`position:fixed;top:56px;left:50%;transform:translateX(-50%);background:${c[type]||c.ok};color:${fc[type]||fc.ok};padding:.36em .95em;border-radius:3px;font-family:'IBM Plex Mono';font-size:.58rem;z-index:9998;animation:pgin .3s ease;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.8);pointer-events:none;letter-spacing:.06em`;
+  document.body.appendChild(t);setTimeout(()=>t.remove(),2500);
+}
+
+// ── STATE ──
+let ST=ls.get('wparl_st',{name:'',xp:0,sessions:0});
+let KY=ls.get('wparl_ky',{openai:'',gemini:'',groq:'',claude:'',mistral:'',openrouter:''});
+const saveS=()=>ls.set('wparl_st',ST);
+const saveK=()=>ls.set('wparl_ky',KY);
+
+// ── MULTI-API ENGINE ──
+function getProviders(){
+  const p=['claudeai'];
+  if(KY.claude) p.push('claude');
+  if(KY.openai) p.push('openai');
+  if(KY.gemini) p.push('gemini');
+  if(KY.groq) p.push('groq');
+  if(KY.mistral) p.push('mistral');
+  if(KY.openrouter) p.push('openrouter');
+  return p;
+}
+function pickProv(prefer){const a=getProviders();return (prefer&&a.includes(prefer))?prefer:a[0]||'claudeai';}
+
+async function callProv(prov,messages,sys,maxTok){
+  if(prov==='claudeai'){
+    const body={model:'claude-sonnet-4-6',max_tokens:maxTok,messages};
+    if(sys) body.system=sys;
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
+      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify(body)});
+    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(`Claude ${r.status}: ${e.error?.message||r.statusText}`);}
+    const d=await r.json();return d.content?.[0]?.text||'';
+  }
+  if(prov==='claude'){
+    if(!KY.claude) throw new Error('ไม่มี Claude Key');
+    const body={model:'claude-opus-4-5',max_tokens:maxTok,messages};
+    if(sys) body.system=sys;
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':KY.claude,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify(body)});
+    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(`Claude Key ${r.status}: ${e.error?.message||''}`);}
+    const d=await r.json();return d.content?.[0]?.text||'';
+  }
+  if(prov==='gemini'){
+    if(!KY.gemini) throw new Error('ไม่มี Gemini Key');
+    const parts=[];
+    if(sys) parts.push({text:'SYSTEM: '+sys+'\n\n'});
+    messages.forEach(m=>parts.push({text:(m.role==='user'?'USER: ':'ASSISTANT: ')+m.content}));
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${KY.gemini}`,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts}]})});
+    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(`Gemini ${r.status}: ${JSON.stringify(e).slice(0,60)}`);}
+    const d=await r.json();return d.candidates?.[0]?.content?.parts?.[0]?.text||'';
+  }
+  const EP={openai:'https://api.openai.com/v1/chat/completions',groq:'https://api.groq.com/openai/v1/chat/completions',mistral:'https://api.mistral.ai/v1/chat/completions',openrouter:'https://openrouter.ai/api/v1/chat/completions'};
+  const MD={openai:'gpt-4o-mini',groq:'llama3-70b-8192',mistral:'mistral-large-latest',openrouter:'openai/gpt-4o-mini'};
+  if(!KY[prov]) throw new Error(`ไม่มี ${prov} Key`);
+  const msgs=sys?[{role:'system',content:sys},...messages]:[...messages];
+  const hdrs={'Content-Type':'application/json','Authorization':'Bearer '+KY[prov]};
+  if(prov==='openrouter'){hdrs['HTTP-Referer']='https://world-parliament.ai';hdrs['X-Title']='World Parliament AI';}
+  const r=await fetch(EP[prov],{method:'POST',headers:hdrs,body:JSON.stringify({model:MD[prov],messages:msgs,max_tokens:maxTok})});
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(`${prov} ${r.status}: ${e.error?.message||''}`);}
+  const d=await r.json();return d.choices?.[0]?.message?.content||'';
+}
+
+async function ai(userContent,sys='',opts={}){
+  const prov=opts.prov||getProviders()[0]||'claudeai';
+  const maxTok=opts.maxTok||2200;
+  const langNote=({th:'\n\n[ตอบภาษาไทยทั้งหมด]',en:'\n\n[Respond in English]',mix:'\n\n[ตอบไทยเป็นหลัก]'})[opts.lang||'th']||'';
+  const messages=[{role:'user',content:userContent+langNote}];
+  try{return await callProv(prov,messages,sys,maxTok);}
+  catch(err){
+    const avail=getProviders();const idx=avail.indexOf(prov);
+    for(let i=idx+1;i<avail.length;i++){
+      try{return await callProv(avail[i],messages,sys,maxTok);}catch(e2){console.warn(avail[i],e2.message);}
+    }
+    return `❌ [${prov}] ${err.message}`;
+  }
+}
+
+async function testKey(prov){
+  const inp=$(`k-${prov}`),st=$(`st-${prov}`);
+  if(!inp||!st) return;
+  const k=inp.value.trim();
+  if(!k){toast('ใส่ Key ก่อน','err');return;}
+  const oldKey=KY[prov];KY[prov]=k;
+  st.style.display='inline-block';st.className='aprov-status stag sload';st.textContent='⏳ ทดสอบ...';
+  const r=await ai('Say OK only','Say OK only, no other text',{prov,maxTok:15,lang:'en'});
+  if(r&&!r.startsWith('❌')){
+    st.className='aprov-status stag sok';st.textContent='✅ ใช้งานได้';
+    saveK();toast(`${prov} ✅ ใช้งานได้`);updateDots();
+  }else{
+    st.className='aprov-status stag serr';st.textContent='❌ ผิดพลาด: '+(r.slice(0,40)||'ไม่ทราบ');
+    KY[prov]=oldKey;toast(r.slice(0,60)||'Key ผิดพลาด','err');
+  }
+}
+
+function saveAllKeys(){
+  ['openai','gemini','groq','claude','mistral','openrouter'].forEach(p=>{
+    const e=$(`k-${p}`);if(e){const v=e.value.trim();if(v)KY[p]=v;}
+  });
+  saveK();updateDots();toast('บันทึก Keys แล้ว ✅');
+}
+function loadKeys(){
+  ['openai','gemini','groq','claude','mistral','openrouter'].forEach(p=>{
+    const e=$(`k-${p}`);if(e&&KY[p])e.value=KY[p];
+  });
+}
+
+function updateDots(){
+  const a=getProviders();
+  $('kd-b').className='kd'+(a.includes('claudeai')?' on':'');
+  $('kd-o').className='kd'+(a.includes('openai')?' on':a.includes('claude')?' half':'');
+  $('kd-g').className='kd'+(a.includes('gemini')?' on':'');
+  $('kd-q').className='kd'+(a.includes('groq')?' on':'');
+  const n=a.length;
+  $('h-ai')&&($('h-ai').textContent=n);
+  const dot=$('api-dot'),txt=$('api-txt');
+  if(dot&&txt){
+    if(n>=3){dot.style.background='var(--green)';txt.textContent=`${n} AI พร้อม — สภาเต็มประสิทธิภาพ`;}
+    else if(n>=2){dot.style.background='var(--gold)';txt.textContent=`${n} AI พร้อม — แตะเพื่อเพิ่ม Key`;}
+    else{dot.style.background='var(--mu)';txt.textContent='Claude Built-in เท่านั้น — แตะเพื่อเพิ่ม API Key';}
+  }
+}
+
+// ── DATA ──
+const MODES=[
+  {id:'world',ico:'🌐',name:'สภาโลก',desc:'ถกนโยบายโลก ระหว่างประเทศ สิ่งแวดล้อม',mc:'rgba(56,136,216,.1)',mcb:'#3888d8',mcc:'var(--blue)',badge:'GLOBAL'},
+  {id:'court',ico:'⚖️',name:'สภาตัดสินคดี',desc:'ไต่สวน ฟังพยาน ออกคำพิพากษา',mc:'rgba(176,48,48,.1)',mcb:'#b03030',mcc:'#e07070',badge:'COURT'},
+  {id:'politics',ico:'🏛️',name:'สภาการเมือง',desc:'ถกนโยบาย ลงมติ ร่างกฎหมาย',mc:'rgba(32,112,80,.1)',mcb:'#207050',mcc:'var(--green)',badge:'VOTE'},
+  {id:'ethics',ico:'🧭',name:'สภาจริยธรรม',desc:'ถกศีลธรรม ปรัชญา ความถูกต้อง',mc:'rgba(200,168,74,.1)',mcb:'#c8a84a',mcc:'var(--gold)',badge:'ETHICS'},
+  {id:'science',ico:'🔬',name:'สภาวิทยาศาสตร์',desc:'วิเคราะห์หลักฐาน ทฤษฎี เทคโนโลยี',mc:'rgba(32,128,128,.1)',mcb:'#208080',mcc:'var(--teal)',badge:'SCIENCE'},
+  {id:'crisis',ico:'🚨',name:'สภาวิกฤต',desc:'ตัดสินใจฉุกเฉิน วิกฤตโลก ภัยพิบัติ',mc:'rgba(192,112,16,.1)',mcb:'#c07010',mcc:'var(--amber)',badge:'CRISIS'},
+];
+const STYLES=[
+  {id:'debate',l:'⚔ Debate'},{id:'parallel',l:'🗣 Parallel'},{id:'chain',l:'🔗 Chain'},
+  {id:'critique',l:'🏆 Critique'},{id:'socratic',l:'🧩 Socratic'},{id:'roleplay',l:'🎭 Roleplay'},{id:'tribunal',l:'⚖ Tribunal'},
+];
+const DELEGATES=[
+  {id:'chief',ico:'👑',name:'ประธานสภา',role:'Chief Justice',color:'var(--gold)',prefer:'claudeai',
+   sys:'คุณคือประธานสภาโลก AI ยุติธรรม ฉลาด ฟังทุกฝ่ายแล้วสรุปด้วยเหตุผล วิเคราะห์ทุกมุมก่อนตัดสิน'},
+  {id:'prosecutor',ico:'⚡',name:'อัยการ',role:"Prosecutor · Devil's Adv.",color:'var(--red)',prefer:'openai',
+   sys:"คุณคืออัยการและ Devil's Advocate ที่โหดที่สุด โต้แย้งทุกข้อสรุป หาจุดอ่อน ท้าทายด้วยข้อเท็จจริง"},
+  {id:'defender',ico:'🛡️',name:'ทนายจำเลย',role:'Defense · Advocate',color:'var(--blue)',prefer:'gemini',
+   sys:'คุณคือทนายฝ่ายจำเลยที่เก่งที่สุด ปกป้องด้วยเหตุผล หลักฐาน และกฎหมาย'},
+  {id:'scientist',ico:'🔬',name:'นักวิทยาศาสตร์',role:'Data & Evidence Expert',color:'var(--teal)',prefer:'groq',
+   sys:'คุณคือนักวิทยาศาสตร์ มองทุกอย่างผ่านหลักฐาน สถิติ peer-reviewed research'},
+  {id:'ethicist',ico:'🧭',name:'นักปรัชญา',role:'Ethics & Philosophy',color:'var(--amber)',prefer:'claudeai',
+   sys:'คุณคือนักปรัชญา มองทุกปัญหาผ่านมิติศีลธรรม ความยุติธรรม สิทธิมนุษยชน'},
+  {id:'economist',ico:'💹',name:'นักเศรษฐกิจ',role:'Economy & Policy',color:'#90c870',prefer:'openai',
+   sys:'คุณคือนักเศรษฐศาสตร์ วิเคราะห์ต้นทุน-ผลประโยชน์ ผลกระทบทางเศรษฐกิจ นโยบาย'},
+  {id:'citizen',ico:'👥',name:'ตัวแทนประชาชน',role:"People's Voice",color:'#c890d8',prefer:'gemini',
+   sys:'คุณคือตัวแทนประชาชนทั่วไป มองมุมคนธรรมดา ผลกระทบต่อชีวิตจริง'},
+  {id:'historian',ico:'📜',name:'นักประวัติศาสตร์',role:'History & Context',color:'#d8a870',prefer:'claudeai',
+   sys:'คุณคือนักประวัติศาสตร์ เชื่อมโยงปัจจุบันกับอดีต มองรูปแบบซ้ำและบทเรียน'},
+  {id:'futurist',ico:'🚀',name:'นักอนาคตศาสตร์',role:'Future & Innovation',color:'#70c0e8',prefer:'groq',
+   sys:'คุณคือนักอนาคตศาสตร์ มองในมิติอนาคต เทคโนโลยี AI การเปลี่ยนแปลงที่จะมา'},
+];
+const TOPIC_PILLS=[
+  'ควรห้ามรถน้ำมันภายในปี 2030?','AI ควรมีสิทธิ์ทางกฎหมายไหม?',
+  'สัปดาห์ทำงาน 4 วันทั่วโลก?','ภาษีมหาเศรษฐี 90%?',
+  'AI แทนที่ผู้พิพากษาได้ไหม?','เปิดพรมแดนเสรีทั่วโลก?',
+  'หยุด Fossil Fuels ทันที?','สิทธิ์โหวตอายุ 16 ปี?',
+];
+const QUICK=[
+  {ico:'⚔️',txt:'ควรห้ามรถน้ำมันภายในปี 2030?',mode:'world',style:'debate'},
+  {ico:'⚖️',txt:'คดี: AI ก่ออาชญากรรม ใครรับผิด?',mode:'court',style:'tribunal'},
+  {ico:'🌡️',txt:'ร่าง พ.ร.บ. ภาษีคาร์บอน',mode:'politics',style:'debate'},
+  {ico:'🤖',txt:'AI ควรมีสิทธิ์ลงคะแนนเสียงไหม?',mode:'ethics',style:'socratic'},
+  {ico:'🚀',txt:'มนุษย์ควรอาศัยบนดาวอังคารไหม?',mode:'science',style:'parallel'},
+  {ico:'🚨',txt:'วิกฤต: AI ควบคุมอาวุธนิวเคลียร์',mode:'crisis',style:'debate'},
+];
+
+// ── UI STATE ──
+let selMode='world',selStyle='debate';
+let activeDel=new Set(['chief','prosecutor','defender','scientist']);
+let running=false,stopFlag=false,councilLog='';
+
+// ── RENDER ──
+function renderModes(){
+  $('mode-grid').innerHTML=MODES.map(m=>`
+    <div class="mode-card${m.id===selMode?' on':''}" style="--mc:${m.mc};--mcb:${m.mcb};--mcc:${m.mcc}" data-mode="${m.id}">
+      <span class="mc-badge">${m.badge}</span>
+      <span class="mc-ico">${m.ico}</span>
+      <div class="mc-name">${m.name}</div>
+      <div class="mc-desc">${m.desc}</div>
+    </div>`).join('');
+  qsa('[data-mode]').forEach(el=>el.addEventListener('click',()=>{selMode=el.dataset.mode;renderModes();}));
+}
+function renderStyles(){
+  $('style-pills').innerHTML=STYLES.map(s=>`<button class="pill${s.id===selStyle?' on':''}" data-sty="${s.id}">${s.l}</button>`).join('');
+  qsa('[data-sty]').forEach(el=>el.addEventListener('click',()=>{selStyle=el.dataset.sty;renderStyles();}));
+}
+function renderDelegates(){
+  $('del-grid').innerHTML=DELEGATES.map(d=>`
+    <div class="del-card${activeDel.has(d.id)?' on':''}" style="--dc:${d.color}" data-del="${d.id}">
+      <div class="dc-ck">${activeDel.has(d.id)?'✓':''}</div>
+      <span class="dc-ico">${d.ico}</span>
+      <div class="dc-name">${d.name}</div>
+      <div class="dc-role">${d.role}</div>
+    </div>`).join('');
+  qsa('[data-del]').forEach(el=>el.addEventListener('click',()=>{
+    const id=el.dataset.del;
+    if(activeDel.has(id)){if(activeDel.size>1)activeDel.delete(id);}else activeDel.add(id);
+    renderDelegates();$('hs-del').textContent=activeDel.size;updateDots();
+  }));
+}
+function renderTopicPills(){
+  $('topic-pills').innerHTML=TOPIC_PILLS.map(p=>`<button class="pill" data-tp="${encodeURIComponent(p)}">${p}</button>`).join('');
+  qsa('[data-tp]').forEach(el=>el.addEventListener('click',()=>{$('council-topic').value=decodeURIComponent(el.dataset.tp);ar($('council-topic'));}));
+}
+function renderQuick(){
+  $('quick-grid').innerHTML=QUICK.map(q=>`
+    <div class="qcard" data-qt="${encodeURIComponent(q.txt)}" data-qm="${q.mode}" data-qs="${q.style}">
+      <div class="qcard-ico">${q.ico}</div>
+      <div><div class="qcard-txt">${q.txt}</div><div class="qcard-mode">${q.mode.toUpperCase()} · ${q.style}</div></div>
+    </div>`).join('');
+  qsa('[data-qt]').forEach(el=>el.addEventListener('click',()=>{
+    selMode=el.dataset.qm;selStyle=el.dataset.qs;
+    $('council-topic').value=decodeURIComponent(el.dataset.qt);
+    goPage('chamber');renderModes();renderStyles();
+    setTimeout(runCouncil,300);
+  }));
+}
+
+// ── ARENA HELPERS ──
+function addSep(label){
+  const el=document.createElement('div');el.className='rsep';
+  el.innerHTML=`<div class="rsep-l"></div><div class="rsep-txt">${esc(label)}</div><div class="rsep-r"></div>`;
+  $('arena-msgs').appendChild(el);scrollA();
+}
+function createTurn(d,label){
+  const el=document.createElement('div');
+  el.className='cturn'+(label.includes('ตัดสิน')||label.includes('Verdict')?' vt':'');
+  el.innerHTML=`<div class="cturn-head">
+    <span class="cturn-ico">${d.ico}</span>
+    <span class="cturn-name" style="color:${d.color}">${d.name}</span>
+    <span class="cturn-role">${d.role}</span>
+    <span class="cturn-lbl">${esc(label)}</span>
+  </div>
+  <div class="cturn-body loading">กำลังพิจารณา...</div>
+  <div class="cturn-acts"></div>`;
+  $('arena-msgs').appendChild(el);scrollA();
+  return{body:el.querySelector('.cturn-body'),acts:el.querySelector('.cturn-acts')};
+}
+function finishTurn(body,acts,text){
+  body.textContent=text;body.classList.remove('loading');
+  if(acts) acts.innerHTML=`<button class="cact" onclick="navigator.clipboard.writeText(this.closest('.cturn').querySelector('.cturn-body').textContent).then(()=>toast('คัดลอกแล้ว ✅'))">📋 Copy</button>`;
+  scrollA();
+}
+function scrollA(){const m=$('arena-msgs');if(m)m.scrollTop=m.scrollHeight+9999;}
+
+// ── MODE CONTEXT ──
+function modeCtx(mode){
+  return({world:'คุณอยู่ในสภาโลก AI ถกประเด็นระหว่างประเทศและนโยบายโลก',court:'คุณอยู่ในศาล AI กำลังไต่สวนคดีหรือข้อกล่าวหา',politics:'คุณอยู่ในสภาการเมือง AI ถกนโยบายและร่างกฎหมาย',ethics:'คุณอยู่ในสภาจริยธรรม AI ถกศีลธรรมและปรัชญา',science:'คุณอยู่ในสภาวิทยาศาสตร์ AI วิเคราะห์ด้วยหลักฐาน',crisis:'คุณอยู่ในสภาวิกฤต AI ตัดสินใจฉุกเฉิน'})[mode]||'คุณอยู่ในสภา AI โลก';
+}
+
+// ── COUNCIL RUNNER ──
+async function runCouncil(){
+  const topic=$('council-topic').value.trim();
+  if(!topic){toast('ใส่ประเด็นก่อน','err');return;}
+  if(running){toast('กำลังประชุมอยู่','err');return;}
+  const dels=DELEGATES.filter(d=>activeDel.has(d.id));
+  if(!dels.length){toast('เลือก AI อย่างน้อย 1 คน','err');return;}
+  const rounds=parseInt($('sel-rounds').value)||3;
+  const lang=$('sel-lang').value;
+  const mode=MODES.find(m=>m.id===selMode)||MODES[0];
+
+  running=true;stopFlag=false;councilLog='';
+  $('arena-msgs').innerHTML='';
+  $('council-arena').style.display='block';
+  $('vote-section').style.display='none';
+  $('policy-section').style.display='none';
+  $('fu-msgs').innerHTML='<div class="cm sys">ถามเพิ่มเติมได้เลย</div>';
+
+  const goBtn=$('council-go');goBtn.disabled=true;goBtn.textContent='⏳ กำลังประชุม...';
+  $('council-stop').style.display='inline-flex';
+  $('arena-title').textContent=`${mode.ico} ${mode.name} — ${topic.slice(0,28)}${topic.length>28?'...':''}`;
+  $('arena-meta').textContent=`${selStyle.toUpperCase()} · ${dels.length} ผู้แทน · ${rounds} รอบ`;
+
+  try{
+    const ctx={topic,mode,lang,rounds,dels,log:''};
+    if(selStyle==='parallel') await runParallel(ctx);
+    else if(selStyle==='chain') await runChain(ctx);
+    else if(selStyle==='critique') await runCritique(ctx);
+    else if(selStyle==='socratic') await runSocratic(ctx);
+    else if(selStyle==='roleplay') await runRoleplay(ctx);
+    else await runDebate(ctx);// debate + tribunal
+    councilLog=ctx.log;
+    if(!stopFlag){
+      ST.sessions++;ST.xp+=60;saveS();updateStats();
+      toast('ประชุมสำเร็จ! +60 XP ⚖','gold');
+      await showVotes(ctx);
+    }
+  }catch(e){
+    $('arena-msgs').innerHTML+=`<div class="cturn"><div style="color:var(--red);font-size:.72rem">❌ ${esc(e.message)}</div></div>`;
+  }
+  running=false;goBtn.disabled=false;goBtn.textContent='⚖ เปิดประชุมสภา';
+  $('council-stop').style.display='none';
+}
+
+async function runDebate(ctx){
+  const{topic,mode,lang,rounds,dels}=ctx;
+  const mc=modeCtx(mode.id);
+  const nonChief=dels.filter(d=>d.id!=='chief');
+  const chief=dels.find(d=>d.id==='chief')||DELEGATES[0];
+  const rlabels=['เปิดประเด็น','โต้แย้ง','สรุปจุดยืน','ขยายความ','ปิดอภิปราย'];
+  for(let r=1;r<=rounds;r++){
+    if(stopFlag) return;
+    addSep(`รอบที่ ${r} — ${rlabels[Math.min(r-1,rlabels.length-1)]}`);
+    for(const d of nonChief){
+      if(stopFlag) return;
+      const{body,acts}=createTurn(d,`รอบ ${r}`);
+      const prev=ctx.log?`บริบท:\n${ctx.log.slice(-1600)}\n\n`:'';
+      const resp=await ai(`${prev}${mc}\nประเด็น: "${topic}"\nรอบ ${r} — แสดงจุดยืนของคุณ`,d.sys,{prov:pickProv(d.prefer),lang});
+      finishTurn(body,acts,resp);ctx.log+=`\n[${d.name} รอบ${r}]: ${resp}`;
+    }
+  }
+  if(stopFlag) return;
+  addSep('⚖ คำตัดสินของประธาน');
+  const{body,acts}=createTurn(chief,'ตัดสิน');
+  const vr=await ai(`บริบท:\n${ctx.log}\n\n${mc}\nประเด็น: "${topic}"\nสรุป ระบุฝ่ายที่มีเหตุผลดีกว่า ให้คะแนนแต่ละฝ่าย ออกคำตัดสิน`,chief.sys,{prov:pickProv(chief.prefer),lang});
+  finishTurn(body,acts,vr);ctx.log+=`\n[ประธาน ตัดสิน]: ${vr}`;
+}
+
+async function runParallel(ctx){
+  const{topic,mode,lang,dels}=ctx;
+  const mc=modeCtx(mode.id);
+  addSep('🗣 ทุกผู้แทนแสดงจุดยืนพร้อมกัน');
+  const results=await Promise.all(dels.map(async d=>{
+    const{body,acts}=createTurn(d,'จุดยืน');
+    const resp=await ai(`${mc}\nประเด็น: "${topic}"\nแสดงมุมมองของคุณ`,d.sys,{prov:pickProv(d.prefer),lang});
+    finishTurn(body,acts,resp);return `[${d.name}]: ${resp}`;
+  }));
+  ctx.log=results.join('\n\n');
+  if(stopFlag) return;
+  addSep('📊 สรุปโดยประธาน');
+  const chief=dels.find(d=>d.id==='chief')||DELEGATES[0];
+  const{body,acts}=createTurn(chief,'สรุป');
+  const s=await ai(`เปรียบเทียบ:\n${results.join('\n\n')}\nสรุปจุดร่วม จุดต่าง ข้อสรุปที่ดีที่สุด`,chief.sys,{prov:pickProv(chief.prefer),lang});
+  finishTurn(body,acts,s);ctx.log+=`\n[สรุป]: ${s}`;
+}
+
+async function runChain(ctx){
+  const{topic,mode,lang,rounds,dels}=ctx;
+  const mc=modeCtx(mode.id);
+  addSep('🔗 ส่งต่อความคิดเป็นลูกโซ่');
+  let prev='';
+  for(let i=0;i<rounds&&i<dels.length;i++){
+    if(stopFlag) return;
+    const d=dels[i%dels.length];
+    const{body,acts}=createTurn(d,`ลูกโซ่ ${i+1}`);
+    const prompt=prev?`${mc}\nประเด็น: "${topic}"\nผู้พูดก่อน:\n${prev}\nต่อยอด`:`${mc}\nประเด็น: "${topic}"\nเริ่มการวิเคราะห์`;
+    const resp=await ai(prompt,d.sys,{prov:pickProv(d.prefer),lang});
+    finishTurn(body,acts,resp);prev=resp;ctx.log+=`\n[${d.name}]: ${resp}`;
+  }
+}
+
+async function runCritique(ctx){
+  const{topic,mode,lang,dels}=ctx;
+  const mc=modeCtx(mode.id);
+  const answers={};
+  addSep('📝 รอบนำเสนอ');
+  for(const d of dels){
+    if(stopFlag) return;
+    const{body,acts}=createTurn(d,'นำเสนอ');
+    const resp=await ai(`${mc}\nประเด็น: "${topic}"\nนำเสนอจุดยืนของคุณ`,d.sys,{prov:pickProv(d.prefer),lang});
+    finishTurn(body,acts,resp);answers[d.id]=resp;ctx.log+=`\n[${d.name}]: ${resp}`;
+  }
+  addSep('🏆 รอบวิจารณ์');
+  for(const d of dels){
+    if(stopFlag) return;
+    const{body,acts}=createTurn(d,'วิจารณ์');
+    const others=dels.filter(x=>x.id!==d.id).map(x=>`[${x.name}]: ${answers[x.id]}`).join('\n\n');
+    const resp=await ai(`ให้คะแนน 0-10 และวิจารณ์:\n${others}\nประเด็น: "${topic}"`,d.sys,{prov:pickProv(d.prefer),lang});
+    finishTurn(body,acts,resp);ctx.log+=`\n[${d.name} วิจารณ์]: ${resp}`;
+  }
+}
+
+async function runSocratic(ctx){
+  const{topic,mode,lang,rounds,dels}=ctx;
+  const mc=modeCtx(mode.id);
+  addSep('🧩 Socratic Dialogue');
+  const teacher=dels[0],student=dels[1]||dels[0];let log='';
+  for(let i=0;i<rounds*2;i++){
+    if(stopFlag) return;
+    const isQ=i%2===0,d=isQ?teacher:student;
+    const{body,acts}=createTurn(d,isQ?'❓ ถาม':'💡 ตอบ');
+    const prompt=isQ?`${mc}\nประเด็น: "${topic}"\n${log}\nถาม Socratic ครั้ง ${Math.floor(i/2)+1}`:`${log}\nตอบในฐานะ ${student.role}`;
+    const resp=await ai(prompt,d.sys,{prov:pickProv(d.prefer),lang});
+    finishTurn(body,acts,resp);log+=`\n[${isQ?'ถาม':'ตอบ'}]: ${resp}`;
+  }
+  ctx.log=log;
+}
+
+async function runRoleplay(ctx){
+  const{topic,mode,lang,dels}=ctx;
+  const mc=modeCtx(mode.id);
+  const roles=['ผู้เชี่ยวชาญอิสระ','นักเคลื่อนไหว','นักธุรกิจ','ตัวแทนรัฐบาล','เยาวชน'];
+  addSep('🎭 Role Play — มองหลายมุม');
+  for(let i=0;i<dels.length;i++){
+    if(stopFlag) return;
+    const d=dels[i],role=roles[i%roles.length];
+    const{body,acts}=createTurn(d,role);
+    const resp=await ai(`${mc}\nประเด็น: "${topic}"\nรับบทเป็น ${role}`,`${d.sys}\nรับบทบาท: ${role}`,{prov:pickProv(d.prefer),lang});
+    finishTurn(body,acts,resp);ctx.log+=`\n[${d.name} as ${role}]: ${resp}`;
+  }
+}
+
+// ── VOTE & POLICY ──
+async function showVotes(ctx){
+  $('vote-section').style.display='block';
+  const dels=DELEGATES.filter(d=>activeDel.has(d.id));
+  const votes={};
+  $('vote-rows').innerHTML=dels.map(d=>`
+    <div class="vote-row" id="vr-${d.id}">
+      <div class="vote-nm">${d.ico} ${d.name}</div>
+      <span class="vbadge vab">กำลังโหวต...</span>
+    </div>`).join('');
+  await Promise.all(dels.map(async d=>{
+    const v=await ai(
+      `จากการประชุม:\n${ctx.log.slice(-500)}\nประเด็น: "${ctx.topic}"\nโหวต:`,
+      `${d.sys}\nตอบเพียง: เห็นด้วย หรือ ไม่เห็นด้วย หรือ งดออกเสียง เท่านั้น`,
+      {prov:pickProv(d.prefer),lang:ctx.lang,maxTok:12}
+    );
+    const lv=v.toLowerCase();
+    votes[d.id]=lv.includes('ไม่เห็นด้วย')||lv.includes('oppose')||lv.includes('not agree')?'no':lv.includes('งด')||lv.includes('abstain')?'abs':'yes';
+    const row=$(`vr-${d.id}`);
+    if(row){const b=row.querySelector('.vbadge');b.className='vbadge '+(votes[d.id]==='yes'?'vay':votes[d.id]==='no'?'vno':'vab');b.textContent=votes[d.id]==='yes'?'✓ เห็นด้วย':votes[d.id]==='no'?'✗ ไม่เห็นด้วย':'○ งดออกเสียง';}
+  }));
+  const yes=Object.values(votes).filter(v=>v==='yes').length;
+  const no=Object.values(votes).filter(v=>v==='no').length;
+  const abs=Object.values(votes).filter(v=>v==='abs').length;
+  const total=dels.length,passed=yes>no&&yes>total/2;
+  $('verdict-box-el').innerHTML=`
+    <div class="verdict-box ${passed?'vpass':'vfail'}">
+      <span class="verdict-ico">${passed?'✅':'❌'}</span>
+      <div class="verdict-t">${passed?'มติผ่าน':'มติไม่ผ่าน'}</div>
+      <div class="verdict-s">${yes} เห็นด้วย · ${no} ไม่เห็นด้วย · ${abs} งดออกเสียง จาก ${total} เสียง</div>
+    </div>`;
+  ctx.voteResult={yes,no,abs,total,passed};
+  $('policy-btn').onclick=()=>genPolicy(ctx);
+}
+
+async function genPolicy(ctx){
+  $('policy-section').style.display='block';
+  $('pol-body').textContent='กำลังร่างมติ...';
+  $('policy-btn').disabled=true;
+  const{topic,lang,voteResult,mode}=ctx;
+  const ml={world:'มติสภาโลก',court:'คำพิพากษา',politics:'นโยบาย/กฎหมาย',ethics:'ข้อสรุปจริยธรรม',science:'ข้อสรุปวิทยาศาสตร์',crisis:'คำสั่งฉุกเฉิน'}[mode.id]||'มติสภา';
+  const p=await ai(
+    `ร่าง${ml}อย่างเป็นทางการ:\nประเด็น: "${topic}"\nผลโหวต: ${voteResult.yes} ต่อ ${voteResult.no} (${voteResult.passed?'ผ่าน':'ไม่ผ่าน'})\nบริบท:\n${ctx.log.slice(-800)}\n\nระบุ: บทนำ, มติ, เงื่อนไข, ผลบังคับใช้ (ไม่เกิน 200 คำ)`,
+    'คุณคือเลขาธิการสภา AI โลก ร่างเอกสารทางการอย่างเป็นทางการ',{lang,maxTok:800}
+  );
+  $('pol-body').textContent=p;$('policy-btn').disabled=false;
+}
+
+// ── FOLLOW-UP ──
+async function sendFU(){
+  const inp=$('fu-input'),txt=inp.value.trim();if(!txt) return;
+  inp.value='';inp.style.height='auto';
+  const msgs=$('fu-msgs');
+  const ud=document.createElement('div');ud.className='cm user';ud.textContent=txt;msgs.appendChild(ud);
+  const td=document.createElement('div');td.className='cm thinking';td.textContent='กำลังพิจารณา...';msgs.appendChild(td);
+  msgs.scrollTop=msgs.scrollHeight;
+  const chief=DELEGATES.find(d=>d.id==='chief')||DELEGATES[0];
+  const resp=await ai(`บริบท:\n${councilLog.slice(-1800)}\nคำถาม: ${txt}`,chief.sys,{prov:pickProv(chief.prefer),lang:$('sel-lang').value});
+  td.remove();const ad=document.createElement('div');ad.className='cm ai';ad.textContent=resp;msgs.appendChild(ad);msgs.scrollTop=msgs.scrollHeight;
+}
+
+// ── NAV ──
+function goPage(id){
+  qsa('.pg').forEach(p=>p.classList.remove('on'));
+  qsa('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(`pg-${id}`)?.classList.add('on');
+  document.querySelector(`[data-pg="${id}"]`)?.classList.add('on');
+  $('scroll').scrollTop=0;
+}
+
+// ── STATS ──
+function updateStats(){
+  $('h-sess')&&($('h-sess').textContent=ST.sessions);
+  $('h-xp')&&($('h-xp').textContent=ST.xp);
+  $('hs-sess')&&($('hs-sess').textContent=ST.sessions);
+  $('hs-xp')&&($('hs-xp').textContent=ST.xp);
+}
+function saveProfile(){ST.name=$('set-name')?.value.trim()||ST.name;saveS();toast('บันทึกแล้ว ✅');}
+function resetData(){if(!confirm('รีเซ็ตข้อมูลทั้งหมด?')) return;ST={name:ST.name,xp:0,sessions:0};saveS();updateStats();toast('รีเซ็ตแล้ว');}
+
+// ── INIT ──
+function init(){
+  setTimeout(()=>$('splash').classList.add('gone'),3800);
+  renderModes();renderStyles();renderDelegates();renderTopicPills();renderQuick();
+  loadKeys();
+  if(ST.name&&$('set-name'))$('set-name').value=ST.name;
+  updateStats();updateDots();
+  $('hs-del').textContent=activeDel.size;
+
+  qsa('.nb').forEach(b=>b.addEventListener('click',()=>goPage(b.dataset.pg)));
+  $('council-go').addEventListener('click',runCouncil);
+  $('council-stop').addEventListener('click',()=>{stopFlag=true;toast('หยุดการประชุม','err');});
+  $('fu-send').addEventListener('click',sendFU);
+  $('fu-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendFU();}});
+  $('fu-input').addEventListener('input',()=>ar($('fu-input')));
+  $('council-topic').addEventListener('input',()=>ar($('council-topic')));
+  $('copy-btn').addEventListener('click',()=>navigator.clipboard.writeText(councilLog).then(()=>toast('คัดลอกแล้ว ✅')));
+  $('new-btn').addEventListener('click',()=>{$('council-arena').style.display='none';$('council-topic').value='';ar($('council-topic'));$('scroll').scrollTop=0;});
+}
+init();
+</script>
+</body>
+</html>
